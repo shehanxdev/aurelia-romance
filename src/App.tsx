@@ -4,7 +4,9 @@ import { Text } from "@components";
 function App() {
   return (
     <>
-      <Text variant={"body"}>Hello</Text>
+      <Text variant="heading1" textColor={"black"}>
+        Hello
+      </Text>
     </>
   );
 }
