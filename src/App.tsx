@@ -1,12 +1,29 @@
 import "./App.css";
-import { Text } from "@components";
+import { Button, Text } from "@components";
 
 function App() {
   return (
     <>
-      <Text variant="heading1" textColor={"black"}>
+      <Text as={"h1"} variant="heading1">
         Hello
       </Text>
+      <Text as={"h1"} variant="heading2">
+        Hello
+      </Text>
+      <Text as={"h1"} variant="body">
+        Hello
+      </Text>
+      <Text as={"h1"} variant="link">
+        Hello
+      </Text>
+      <Text as={"h1"} variant="label1">
+        Hello
+      </Text>
+      <Text as={"h1"} variant="label2">
+        Hello
+      </Text>
+      <Button>me</Button>
+      <p>Hellooooo</p>
     </>
   );
 }
