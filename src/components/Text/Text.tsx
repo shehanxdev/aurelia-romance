@@ -50,12 +50,14 @@ export function Text({
   ...props
 }: TextProps) {
   return (
-    <Comp
-      className={cn(textVariants({ variant, textColor }), className)}
-      data-testid={testId}
-      {...props}
-    >
-      {children}
-    </Comp>
+    <div className="text-[16px]">
+      <Comp
+        className={cn(textVariants({ variant, textColor }), className)}
+        data-testid={testId}
+        {...props}
+      >
+        {children}
+      </Comp>
+    </div>
   );
 }

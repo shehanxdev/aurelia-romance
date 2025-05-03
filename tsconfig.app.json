@@ -8,6 +8,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@/*": ["./src/*"],
       "@components": ["./src/components/index.ts"]
     },
 
