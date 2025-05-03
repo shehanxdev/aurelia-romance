@@ -7,4 +7,8 @@
   --colo-white: #ffffff;
   --color-black: #000000;
   --color-gray: #858585;
+  --font-family: "Cormorant Garamond", serif;
+}
+html {
+  font-family: var(--font-family);
 }

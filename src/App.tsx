@@ -1,9 +1,11 @@
 import "./App.css";
 import { Button, Link, Text } from "@components";
+import { Navbar } from "./components/NavBar/NavBar";
 
 function App() {
   return (
-    <div className="m-10">
+    <div className="">
+      <Navbar />
       <Text as={"h1"} variant="heading1">
         heading1
       </Text>
