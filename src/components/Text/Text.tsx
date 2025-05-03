@@ -2,13 +2,14 @@ import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../lib";
 
-const textVariants = cva(" m-0 p-0 ", {
+const textVariants = cva("", {
   variants: {
     variant: {
       heading1: "text-[3.75em] md:text-[5em] font-bold",
       heading2: "text-[2.8125em] md:text-[3.75em] font-bold",
       body: "text-[1.375em] md:text-[1.875em]",
-      link: "text-[1.125em] md:text-[1.5em] cursor-pointer",
+      button: "text-[1.125em] md:text-[1.5em] cursor-pointer ",
+
       label1: "text-[0.75em] md:text-[1em]",
       label2: "text-[0.5625em] md:text-[0.8125em]",
     },

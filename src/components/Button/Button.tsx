@@ -4,7 +4,7 @@ import { cn } from "./../../lib/utils";
 import { Text } from "../Text";
 
 const buttonVariants = cva(
-  "rounded-full w-full h-[2.25em] md:h-[3em] active:bg-secondary cursor-pointer transition-colors duration-200 ease-in-out  ",
+  "rounded-full w-full h-[2.25em] md:h-[3em] hover:bg-primary-dark active:bg-secondary cursor-pointer transition-colors duration-200 ease-in-out  ",
   {
     variants: {
       variant: {
@@ -46,7 +46,7 @@ export function Button({
         is most probably caused by line height */}
         <Text
           className="leading-none contents"
-          variant="link"
+          variant="button"
           textColor="white"
         >
           {children}

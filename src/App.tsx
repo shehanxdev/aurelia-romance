@@ -1,30 +1,30 @@
 import "./App.css";
-import { Button, Text } from "@components";
+import { Button, Link, Text } from "@components";
 
 function App() {
   return (
-    <>
+    <div className="m-10">
       <Text as={"h1"} variant="heading1">
-        Hello
+        heading1
       </Text>
       <Text as={"h1"} variant="heading2">
-        Hello
+        heading2
       </Text>
       <Text as={"h1"} variant="body">
-        Hello
+        body
       </Text>
-      <Text as={"h1"} variant="link">
-        Hello
+      <Text as={"h1"} variant="button">
+        button
       </Text>
+      <Link onClick={() => console.log("Hello")}>Link</Link>
       <Text as={"h1"} variant="label1">
-        Hello
+        label1
       </Text>
       <Text as={"h1"} variant="label2">
-        Hello
+        label2
       </Text>
-      <Button>me</Button>
-      <p>Hellooooo</p>
-    </>
+      <Button>Button</Button>
+    </div>
   );
 }
 
