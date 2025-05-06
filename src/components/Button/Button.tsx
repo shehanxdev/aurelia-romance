@@ -4,12 +4,15 @@ import { cn } from "./../../lib/utils";
 import { Text } from "../Text";
 
 const buttonVariants = cva(
-  "rounded-full w-full h-[2.25em] md:h-[3em] hover:bg-primary-dark active:bg-secondary cursor-pointer transition-colors duration-200 ease-in-out  ",
+  "rounded-full w-full h-[2.25em] md:h-[3em] cursor-pointer transition-colors duration-200 ease-in-out  ",
   {
     variants: {
       variant: {
-        filled: "bg-primary text-white",
-        outlined: "bg-transparent",
+        filled:
+          "bg-primary text-white hover:bg-primary-dark active:bg-secondary ",
+        outlined:
+          "bg-transparent outline-1 outline-black text-black hover:outline-primary-dark hover:text-primary-dark active:outline-secondary active:text-secondary",
+        iconButton: "",
       },
     },
     defaultVariants: {
@@ -42,15 +45,21 @@ export function Button({
         className={cn(buttonVariants({ variant, className }))}
         {...props}
       >
-        {/* Note: leading none and contents were used to correct centering
-        is most probably caused by line height */}
-        <Text
-          className="leading-none contents"
-          variant="button"
-          textColor="white"
-        >
-          {children}
-        </Text>
+        {variant === "iconButton" ? (
+          <div>{children}</div>
+        ) : (
+          <>
+            {/* Note: leading-none and contents were used to correct centering
+        most probably caused by line-height */}
+            <Text
+              className="leading-none contents"
+              variant="button"
+              textColor={variant === "filled" ? "white" : "black"}
+            >
+              {children}
+            </Text>
+          </>
+        )}
       </button>
     </div>
   );

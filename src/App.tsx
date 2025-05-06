@@ -25,7 +25,7 @@ function App() {
       <Text as={"h1"} variant="label2">
         label2
       </Text>
-      <Button>Button</Button>
+      <Button variant={"outlined"}>Button</Button>
     </div>
   );
 }

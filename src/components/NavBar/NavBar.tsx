@@ -1,6 +1,6 @@
 import { List, X } from "@phosphor-icons/react";
 import { useState, useEffect, useRef } from "react";
-import { Link } from "@components";
+import { Button, Link } from "@components";
 import logoUrl from "../../assets/gold V2.png";
 
 export const Navbar = () => {
@@ -54,7 +54,7 @@ export const Navbar = () => {
             Home
           </Link>
           <Link variant="large" decoration="noUnderline" textColor="secondary">
-            About
+            Gallery
           </Link>
           {renderLogo()}
           <Link variant="large" decoration="noUnderline" textColor="secondary">
@@ -74,14 +74,18 @@ export const Navbar = () => {
       >
         <div
           ref={drawerRef}
-          className={`fixed left-0 top-0 h-full w-64 bg-white shadow-lg p-4 z-50 transform transition-transform duration-300 ease-in-out ${
+          className={`fixed left-0 top-0 h-[100dvh] w-64 bg-white shadow-lg p-4 z-50 transform transition-transform duration-300 ease-in-out ${
             isOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          <div className="flex justify-between items-center mb-6">
-            <button onClick={() => setIsOpen(false)} aria-label="Close menu">
+          <div className="flex justify-between items-center mb-6 ">
+            <Button
+              variant={"iconButton"}
+              onClick={() => setIsOpen(false)}
+              aria-label="Close menu"
+            >
               <X className="cursor-pointer" size={24} />
-            </button>
+            </Button>
           </div>
           <nav className="flex flex-col gap-4">
             <Link
@@ -96,7 +100,7 @@ export const Navbar = () => {
               decoration="noUnderline"
               textColor="secondary"
             >
-              About
+              Gallery
             </Link>
             <Link
               variant="large"
