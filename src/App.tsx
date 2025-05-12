@@ -1,11 +1,12 @@
 import "./App.css";
-import { Navbar } from "@components";
+
 import { Home } from "@pages";
+import { useScrollSections } from "./hooks";
 
 function App() {
+  useScrollSections(2);
   return (
     <div className="">
-      <Navbar />
       <Home />
     </div>
   );

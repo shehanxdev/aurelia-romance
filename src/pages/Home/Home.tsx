@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import img from "../../assets/slider-images/A4 - 1.png";
+import { Navbar } from "@components";
+import { useScrollSections } from "./../../hooks/useScrollSections";
 
 interface Homeprops {
   readonly className?: string;
 }
 export function Home({ className }: Homeprops) {
+  useScrollSections(3);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [animationClass, setAnimationClass] = useState("");
   const totalImages = 2;
@@ -52,17 +55,33 @@ export function Home({ className }: Homeprops) {
   };
 
   return (
-    <div className={`w-full h-[85dvh] overflow-hidden relative ${className}`}>
-      <div ref={carouselRef} className={`flex w-max h-full ${animationClass}`}>
-        {Array.from({ length: totalImages }).map((_, idx) => (
-          <img
-            key={idx}
-            src={img}
-            alt="carousel"
-            onLoad={handleImageLoad}
-            className="h-full w-auto object-cover"
-          />
-        ))}
+    <div className="relative h-[300vh]">
+      <div className="sticky top-0 h-screen z-[1]">
+        <Navbar />
+        <div
+          className={`w-full h-[85dvh] overflow-hidden relative ${className}`}
+        >
+          <div
+            ref={carouselRef}
+            className={`flex w-max h-full ${animationClass}`}
+          >
+            {Array.from({ length: totalImages }).map((_, idx) => (
+              <img
+                key={idx}
+                src={img}
+                alt="carousel"
+                onLoad={handleImageLoad}
+                className="h-full w-auto object-cover"
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="sticky top-0 h-screen flex items-center justify-center text-white text-4xl bg-red-500 z-[2]">
+        Section 2
+      </div>
+      <div className="sticky top-0 h-screen flex items-center justify-center text-white text-4xl bg-green-500 z-[3]">
+        Section 3
       </div>
     </div>
   );
