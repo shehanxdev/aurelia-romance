@@ -1,4 +1,3 @@
-import React from "react";
 import { useScrollSections } from "./../hooks/useScrollSections";
 
 export function Layout() {
