@@ -1,21 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 import img from "../../assets/slider-images/A4 - 1.png";
 
-export function Home() {
+interface Homeprops {
+  readonly className?: string;
+}
+export function Home({ className }: Homeprops) {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [animationClass, setAnimationClass] = useState("");
-  const totalImages = 2; // Change as needed
+  const totalImages = 2;
   const [imagesLoaded, setImagesLoaded] = useState(0);
+  const SLIDE_RATE_ADJUSTER = 100;
 
   useEffect(() => {
-    if (imagesLoaded < totalImages || !carouselRef.current) return;
+    if (imagesLoaded < totalImages || !carouselRef.current) return undefined;
 
     const totalWidth = carouselRef.current.scrollWidth / 2;
 
-    if (!totalWidth) return;
+    if (!totalWidth) return undefined;
 
     const keyframeName = "scroll-marquee-dynamic";
-    const duration = totalWidth / 100; // Adjust speed as needed
+    const duration = totalWidth / SLIDE_RATE_ADJUSTER;
 
     const style = `
       @keyframes ${keyframeName} {
@@ -48,21 +52,11 @@ export function Home() {
   };
 
   return (
-    <div className="w-full h-[85dvh] overflow-hidden relative">
+    <div className={`w-full h-[85dvh] overflow-hidden relative ${className}`}>
       <div ref={carouselRef} className={`flex w-max h-full ${animationClass}`}>
         {Array.from({ length: totalImages }).map((_, idx) => (
           <img
             key={idx}
-            src={img}
-            alt="carousel"
-            onLoad={handleImageLoad}
-            className="h-full w-auto object-cover"
-          />
-        ))}
-        {/* Duplicate the same set for seamless looping */}
-        {Array.from({ length: totalImages }).map((_, idx) => (
-          <img
-            key={`dup-${idx}`}
             src={img}
             alt="carousel"
             onLoad={handleImageLoad}

@@ -1,6 +1,7 @@
 import { List, X } from "@phosphor-icons/react";
 import { useState, useEffect, useRef } from "react";
-import { Button, Link } from "@components";
+import { Button } from "../Button/Button";
+import { Link } from "../Link/Link";
 import logoUrl from "../../assets/gold V2.png";
 
 export const Navbar = () => {
