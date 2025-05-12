@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import img from "../../assets/slider-images/A4 - 1.png";
 
 export function Home() {
