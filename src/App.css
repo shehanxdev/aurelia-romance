@@ -8,7 +8,48 @@
   --color-black: #000000;
   --color-gray: #858585;
   --font-family: "Cormorant Garamond", serif;
+  --animate-slide: scroll 30s linear infinite;
+  @keyframes slide {
+    0%: {
+      transform: "translateX(0)";
+    }
+    100%: {
+      transform: "translateX(-50%)";
+    }
+  }
 }
+
 html {
   font-family: var(--font-family);
+}
+
+.carousel-container {
+  width: 100%;
+
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-strip {
+  display: flex;
+  height: 100%;
+  width: fit-content;
+  animation: scroll-marquee 20s linear infinite;
+}
+
+.carousel-image {
+  width: auto; /* width of your composite PNG */
+  height: 100dvh;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Marquee animation via transform */
+@keyframes scroll-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-3000px); /* equal to image width */
+  }
 }

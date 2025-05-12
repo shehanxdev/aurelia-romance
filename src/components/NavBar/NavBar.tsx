@@ -87,7 +87,7 @@ export const Navbar = () => {
               <X className="cursor-pointer" size={24} />
             </Button>
           </div>
-          <nav className="flex flex-col gap-4">
+          <nav className="flex flex-col gap-4 h-full">
             <Link
               variant="large"
               decoration="noUnderline"
