@@ -1,20 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 
-export function useScrollSections(sectionCount: number) {
+export function useScrollSectionsByIds(sectionIds: string[]) {
   const [currentSection, setCurrentSection] = useState(0);
   const isScrolling = useRef(false);
   const touchStartY = useRef(0);
 
   useEffect(() => {
     const scrollToSection = (index: number) => {
-      if (index < 0 || index >= sectionCount) return;
-      isScrolling.current = true;
+      const section = document.getElementById(sectionIds[index]);
+      if (!section) return;
 
-      const targetY = window.innerHeight * index;
+      const targetY = section.offsetTop;
       const start = window.scrollY;
       const change = targetY - start;
       const duration = 1000;
       const startTime = performance.now();
+
+      isScrolling.current = true;
 
       const animate = (currentTime: number) => {
         const elapsed = currentTime - startTime;
@@ -40,7 +42,7 @@ export function useScrollSections(sectionCount: number) {
       if (isScrolling.current) return;
 
       let next = currentSection;
-      if (deltaY > 0 && currentSection < sectionCount - 1) next++;
+      if (deltaY > 0 && currentSection < sectionIds.length - 1) next++;
       else if (deltaY < 0 && currentSection > 0) next--;
 
       if (next !== currentSection) {
@@ -79,7 +81,7 @@ export function useScrollSections(sectionCount: number) {
       window.removeEventListener("touchstart", touchStartHandler);
       window.removeEventListener("touchend", touchEndHandler);
     };
-  }, [currentSection, sectionCount]);
+  }, [sectionIds, currentSection]);
 
   return currentSection;
 }

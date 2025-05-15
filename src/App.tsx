@@ -1,14 +1,24 @@
+import { Navbar } from "@components";
+import { Home } from "@pages";
+import { ReactLenis } from "lenis/react";
 import "./App.css";
 
-import { Home } from "@pages";
-import { useScrollSections } from "./hooks";
-
 function App() {
-  useScrollSections(2);
   return (
-    <div className="">
-      <Home />
-    </div>
+    <ReactLenis
+      root
+      options={{
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        autoRaf: true,
+      }}
+    >
+      <div className="">
+        <Navbar />
+
+        <Home />
+      </div>
+    </ReactLenis>
   );
 }
 

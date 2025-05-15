@@ -35,7 +35,7 @@ export const Navbar = () => {
   );
 
   return (
-    <header className="w-full bg-white px-4 py-4 md:py-9 sticky top-0 z-50">
+    <header className="w-full bg-white px-4 py-4 md:py-9  z-50">
       {/* Mobile Navbar */}
       <div className="flex items-center justify-between md:hidden">
         {renderLogo()}

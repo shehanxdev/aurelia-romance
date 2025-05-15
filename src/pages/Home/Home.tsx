@@ -1,87 +1,20 @@
-import { useEffect, useRef, useState } from "react";
-import img from "../../assets/slider-images/A4 - 1.png";
-import { Navbar } from "@components";
-import { useScrollSections } from "./../../hooks/useScrollSections";
+import { HeroSection } from "./HeroSection";
 
-interface Homeprops {
-  readonly className?: string;
-}
-export function Home({ className }: Homeprops) {
-  useScrollSections(3);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [animationClass, setAnimationClass] = useState("");
-  const totalImages = 2;
-  const [imagesLoaded, setImagesLoaded] = useState(0);
-  const SLIDE_RATE_ADJUSTER = 100;
-
-  useEffect(() => {
-    if (imagesLoaded < totalImages || !carouselRef.current) return undefined;
-
-    const totalWidth = carouselRef.current.scrollWidth / 2;
-
-    if (!totalWidth) return undefined;
-
-    const keyframeName = "scroll-marquee-dynamic";
-    const duration = totalWidth / SLIDE_RATE_ADJUSTER;
-
-    const style = `
-      @keyframes ${keyframeName} {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-${totalWidth}px);
-        }
-      }
-
-      .${keyframeName} {
-        animation: ${keyframeName} ${duration}s linear infinite;
-      }
-    `;
-
-    const styleTag = document.createElement("style");
-    styleTag.innerHTML = style;
-    document.head.appendChild(styleTag);
-
-    setAnimationClass(keyframeName);
-
-    return () => {
-      document.head.removeChild(styleTag);
-    };
-  }, [imagesLoaded]);
-
-  const handleImageLoad = () => {
-    setImagesLoaded((prev) => prev + 1);
-  };
-
+export function Home() {
   return (
-    <div className="relative h-[300vh]">
-      <div className="sticky top-0 h-screen z-[1]">
-        <Navbar />
-        <div
-          className={`w-full h-[85dvh] overflow-hidden relative ${className}`}
-        >
-          <div
-            ref={carouselRef}
-            className={`flex w-max h-full ${animationClass}`}
-          >
-            {Array.from({ length: totalImages }).map((_, idx) => (
-              <img
-                key={idx}
-                src={img}
-                alt="carousel"
-                onLoad={handleImageLoad}
-                className="h-full w-auto object-cover"
-              />
-            ))}
-          </div>
-        </div>
+    <div className="relative">
+      <HeroSection className="h-[85vh] sticky top-0 z-[1] min-w-full overflow-hidden" />
+      <div className="layer h-screen bg-blue-200 sticky top-0 z-[2]">
+        Layer 1
       </div>
-      <div className="sticky top-0 h-screen flex items-center justify-center text-white text-4xl bg-red-500 z-[2]">
-        Section 2
+      <div className="layer h-screen bg-green-200 sticky top-0 z-[2]">
+        Layer 2
       </div>
-      <div className="sticky top-0 h-screen flex items-center justify-center text-white text-4xl bg-green-500 z-[3]">
-        Section 3
+      <div className="layer h-screen bg-red-200 sticky top-0 z-[3]">
+        Layer 3
+      </div>
+      <div className="layer h-screen bg-yellow-200 sticky top-0 z-[4]">
+        Layer 4
       </div>
     </div>
   );
