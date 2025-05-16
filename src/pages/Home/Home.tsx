@@ -95,12 +95,16 @@ export function Home() {
             visibility: idx === currentIndex ? "visible" : "hidden",
             opacity: idx === currentIndex ? 1 : 0,
           }}
-          ref={(el) => (sectionRefs.current[idx] = el!)}
+          ref={(el) => {
+            if (el) sectionRefs.current[idx] = el;
+          }}
         >
           {/* Internal scroll container */}
           <div
             className="flex-1 overflow-y-auto "
-            ref={(el) => (scrollContainers.current[idx] = el!)}
+            ref={(el) => {
+              if (el) scrollContainers.current[idx] = el;
+            }}
           >
             {section}
           </div>
