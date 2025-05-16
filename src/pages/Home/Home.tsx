@@ -46,43 +46,113 @@ export function Home() {
     );
   };
 
+  // useEffect(() => {
+  //   const handleWheel = (e: WheelEvent) => {
+  //     if (isAnimating.current) {
+  //       e.preventDefault();
+  //       return;
+  //     }
+  //     const delta = e.deltaY;
+  //     const container = scrollContainers.current[currentIndex];
+  //     if (!container) return;
+
+  //     const atTop = container.scrollTop === 0;
+  //     const atBottom =
+  //       Math.ceil(container.scrollTop + container.clientHeight) >=
+  //       container.scrollHeight;
+
+  //     if (delta > 0) {
+  //       // scrolling down
+  //       if (!atBottom) {
+  //         // let native scroll
+  //         return;
+  //       }
+  //       e.preventDefault();
+  //       if (currentIndex < sections.length - 1)
+  //         animateToSection(currentIndex + 1);
+  //     } else if (delta < 0) {
+  //       // scrolling up
+  //       if (!atTop) {
+  //         // let native scroll
+  //         return;
+  //       }
+  //       e.preventDefault();
+  //       if (currentIndex > 0) animateToSection(currentIndex - 1);
+  //     }
+  //   };
+
+  //   window.addEventListener("wheel", handleWheel, { passive: false });
+  //   return () => window.removeEventListener("wheel", handleWheel);
+  // }, [currentIndex]);
+
   useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      if (isAnimating.current) {
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    const container = scrollContainers.current[currentIndex];
+
+    const handleDirection = (direction: "up" | "down", e: Event) => {
+      if (isAnimating.current || !container) {
         e.preventDefault();
         return;
       }
-      const delta = e.deltaY;
-      const container = scrollContainers.current[currentIndex];
-      if (!container) return;
 
       const atTop = container.scrollTop === 0;
       const atBottom =
         Math.ceil(container.scrollTop + container.clientHeight) >=
         container.scrollHeight;
 
-      if (delta > 0) {
-        // scrolling down
-        if (!atBottom) {
-          // let native scroll
-          return;
-        }
+      if (direction === "down") {
+        if (!atBottom) return;
         e.preventDefault();
-        if (currentIndex < sections.length - 1)
+        if (currentIndex < sections.length - 1) {
           animateToSection(currentIndex + 1);
-      } else if (delta < 0) {
-        // scrolling up
-        if (!atTop) {
-          // let native scroll
-          return;
         }
+      } else {
+        if (!atTop) return;
         e.preventDefault();
-        if (currentIndex > 0) animateToSection(currentIndex - 1);
+        if (currentIndex > 0) {
+          animateToSection(currentIndex - 1);
+        }
+      }
+    };
+
+    const handleWheel = (e: WheelEvent) => {
+      handleDirection(e.deltaY > 0 ? "down" : "up", e);
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowDown") {
+        handleDirection("down", e);
+      } else if (e.key === "ArrowUp") {
+        handleDirection("up", e);
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      touchEndY = e.changedTouches[0].clientY;
+      const deltaY = touchStartY - touchEndY;
+
+      if (Math.abs(deltaY) > 50) {
+        handleDirection(deltaY > 0 ? "down" : "up", e);
       }
     };
 
     window.addEventListener("wheel", handleWheel, { passive: false });
-    return () => window.removeEventListener("wheel", handleWheel);
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: false });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
   }, [currentIndex]);
 
   return (
