@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
-import img from "../../assets/slider-images/A4 - 1.png";
+import { useEffect, useRef, useState } from 'react';
+
+import img from '../../assets/slider-images/A4 - 1.png';
 
 interface HeroSection {
   readonly className?: string;
@@ -53,7 +54,10 @@ export function HeroSection({ className }: HeroSection) {
 
   return (
     <div className={className}>
-      <div ref={carouselRef} className={`flex w-max h-full ${animationClass}`}>
+      <div
+        ref={carouselRef}
+        className={`flex w-max h-[100dvh] ${animationClass}`}
+      >
         {Array.from({ length: totalImages }).map((_, idx) => (
           <img
             key={idx}

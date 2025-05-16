@@ -1,11 +1,14 @@
-import { List, X } from "@phosphor-icons/react";
-import { useState, useEffect, useRef } from "react";
-import { Button } from "../Button/Button";
-import { Link } from "../Link/Link";
-import logoUrl from "../../assets/gold V2.png";
+import { useEffect, useRef, useState } from 'react';
+
+import { List, X } from '@phosphor-icons/react';
+
+import logoUrl from '../../assets/gold V2.png';
+import { Button } from '../Button/Button';
+import { Link } from '../Link/Link';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [hasOpened, setHasOpened] = useState(false);
   const drawerRef = useRef<HTMLDivElement | null>(null);
 
   // Close drawer when clicking outside
@@ -25,98 +28,71 @@ export const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
-
-  const renderLogo = () => (
-    <img
-      src={logoUrl}
-      alt="Logo"
-      className="h-8 md:h-14 w-auto cursor-pointer"
-    />
-  );
-
+  useEffect(() => {
+    if (isOpen) setHasOpened(true);
+  }, [isOpen]);
   return (
-    <header className="w-full bg-white px-4 py-4 md:py-9  z-50">
+    <header className="w-full px-4 py-4 md:py-9 absolute z-50 font-serif text-white">
       {/* Mobile Navbar */}
-      <div className="flex items-center justify-between md:hidden">
-        {renderLogo()}
-        <button
-          onClick={() => setIsOpen(true)}
-          className="text-gray-700"
-          aria-label="Open menu"
-        >
-          <List className="cursor-pointer" size={28} />
-        </button>
+      <div className="flex items-center justify-between   ">
+        <div className="absolute top-4 left-4 md:top-10 md:left-10 backdrop-blur-3xl bg-white/30 text-black px-4 py-2 rounded-lg shadow-md">
+          <img
+            src={logoUrl}
+            alt="Logo"
+            className="h-8 md:h-18 w-auto cursor-pointer"
+          />
+        </div>
+        <div className="absolute top-4 right-4 md:top-10 md:right-10 backdrop-blur-sm bg-white/60 rounded-lg shadow-md flex items-center justify-center w-10 h-10">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="text-gray-700"
+            aria-label="Open menu"
+          >
+            <List className="cursor-pointer text-2xl md:text-4xl text-primary-dark" />
+          </button>
+        </div>
       </div>
 
-      {/* Desktop Navbar */}
-      <div className="hidden md:flex items-center justify-center">
-        <nav className="flex w-full justify-center items-center gap-x-14">
-          <Link variant="large" decoration="noUnderline" textColor="secondary">
-            Home
-          </Link>
-          <Link variant="large" decoration="noUnderline" textColor="secondary">
-            Gallery
-          </Link>
-          {renderLogo()}
-          <Link variant="large" decoration="noUnderline" textColor="secondary">
-            Services
-          </Link>
-          <Link variant="large" decoration="noUnderline" textColor="secondary">
-            Contact
-          </Link>
-        </nav>
-      </div>
-
-      {/* Overlay + Drawer (always mounted for animation) */}
+      {/* Overlay */}
       <div
-        className={`fixed inset-0 z-40 transition-opacity duration-300 ease-in-out ${
-          isOpen ? "bg-black/50 opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-40 flex items-center justify-center transition-opacity backdrop-blur-sm duration-300 ease-in-out ${
+          isOpen
+            ? "opacity-100 portal-zoom-in"
+            : hasOpened
+            ? "opacity-0 pointer-events-none portal-zoom-out"
+            : "opacity-0 pointer-events-none"
+        } bg-black/60`}
       >
+        {/* Side Drawer */}
         <div
           ref={drawerRef}
-          className={`fixed left-0 top-0 h-[100dvh] w-64 bg-white shadow-lg p-4 z-50 transform transition-transform duration-300 ease-in-out ${
-            isOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+          className="w-[100dvw] h-[100dvh] bg-white/10 backdrop-blur-2xl border-r border-white/20 shadow-2xl p-6 z-50"
         >
-          <div className="flex justify-between items-center mb-6 ">
+          <div className="flex justify-end mb-8">
             <Button
               variant={"iconButton"}
               onClick={() => setIsOpen(false)}
               aria-label="Close menu"
             >
-              <X className="cursor-pointer" size={24} />
+              <X
+                className="cursor-pointer text-white hover:text-gold transition"
+                size={24}
+              />
             </Button>
           </div>
-          <nav className="flex flex-col gap-4 h-full">
-            <Link
-              variant="large"
-              decoration="noUnderline"
-              textColor="secondary"
-            >
-              Home
-            </Link>
-            <Link
-              variant="large"
-              decoration="noUnderline"
-              textColor="secondary"
-            >
-              Gallery
-            </Link>
-            <Link
-              variant="large"
-              decoration="noUnderline"
-              textColor="secondary"
-            >
-              Services
-            </Link>
-            <Link
-              variant="large"
-              decoration="noUnderline"
-              textColor="secondary"
-            >
-              Contact
-            </Link>
+
+          <nav className="flex flex-col gap-6">
+            {["Home", "Gallery", "Services", "Contact"].map((item) => (
+              <Link
+                key={item}
+                variant="large"
+                decoration="noUnderline"
+                textColor="secondary"
+                className="text-lg text-white hover:text-gold transition-colors border-b border-white/10 pb-2"
+              >
+                {item}
+              </Link>
+            ))}
           </nav>
         </div>
       </div>

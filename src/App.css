@@ -21,4 +21,35 @@
 
 html {
   font-family: var(--font-family);
+  overflow: hidden;
+}
+
+@keyframes portalZoomIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes portalZoomOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+}
+
+.portal-zoom-in {
+  animation: portalZoomIn 0.4s ease-out forwards;
+}
+
+.portal-zoom-out {
+  animation: portalZoomOut 0.3s ease-in forwards;
 }
