@@ -20,31 +20,30 @@ export function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const isAnimating = useRef(false);
 
-  const animateToSection = (newIndex: number) => {
-    if (isAnimating.current || newIndex === currentIndex) return;
-    isAnimating.current = true;
+  //   if (isAnimating.current || newIndex === currentIndex) return;
+  //   isAnimating.current = true;
 
-    const prevEl = sectionRefs.current[currentIndex];
-    const nextEl = sectionRefs.current[newIndex];
+  //   const prevEl = sectionRefs.current[currentIndex];
+  //   const nextEl = sectionRefs.current[newIndex];
 
-    const tl = gsap.timeline({
-      defaults: { duration: 0.8, ease: "power3.out" },
-      onComplete: () => {
-        setCurrentIndex(newIndex);
-        isAnimating.current = false;
-      },
-    });
+  //   const tl = gsap.timeline({
+  //     defaults: { duration: 1, ease: "power1.out" },
+  //     onComplete: () => {
+  //       setCurrentIndex(newIndex);
+  //       isAnimating.current = false;
+  //     },
+  //   });
 
-    // Prepare next section
-    tl.set(nextEl, { autoAlpha: 1, scale: 0.6, xPercent: 50 });
+  //   // Prepare next section
+  //   tl.set(nextEl, { autoAlpha: 1, scale: 0, xPercent: 100 });
 
-    // Animate prev out and next in simultaneously
-    tl.to(prevEl, { autoAlpha: 0, scale: 0.6, xPercent: 50 }, 0).to(
-      nextEl,
-      { autoAlpha: 1, scale: 1, xPercent: 0 },
-      0
-    );
-  };
+  //   // Animate prev out and next in simultaneously
+  //   tl.to(prevEl, { autoAlpha: 0, scale: 0, xPercent: 100 }, 0).to(
+  //     nextEl,
+  //     { autoAlpha: 1, scale: 1, xPercent: 0 },
+  //     0
+  //   );
+  // };
 
   // useEffect(() => {
   //   const handleWheel = (e: WheelEvent) => {
@@ -84,6 +83,78 @@ export function Home() {
   //   window.addEventListener("wheel", handleWheel, { passive: false });
   //   return () => window.removeEventListener("wheel", handleWheel);
   // }, [currentIndex]);
+  const animateToSection = (newIndex: number) => {
+    if (isAnimating.current || newIndex === currentIndex) return;
+    isAnimating.current = true;
+
+    const currentEl = sectionRefs.current[currentIndex];
+    const nextEl = sectionRefs.current[newIndex];
+    const direction = newIndex > currentIndex ? "down" : "up";
+
+    const tl = gsap.timeline({
+      defaults: { duration: 0.7, ease: "power1.in" },
+      onComplete: () => {
+        setCurrentIndex(newIndex);
+        isAnimating.current = false;
+      },
+    });
+
+    if (direction === "down") {
+      // Prepare next section off-screen, scaled down
+      tl.set(nextEl, {
+        autoAlpha: 1,
+        scale: 0,
+        yPercent: 100,
+      });
+
+      // Slightly scale up current section to simulate zoom-out effect
+      tl.to(
+        currentEl,
+        {
+          filter: "blur(15px)",
+        },
+        0
+      );
+
+      // Animate next section scaling up and moving in
+      tl.to(
+        nextEl,
+        {
+          scale: 1,
+          yPercent: 0,
+        },
+        0
+      );
+    } else {
+      // Prepare previous (nextEl) to be larger and in place
+      tl.set(nextEl, {
+        autoAlpha: 1,
+
+        filter: "blur(15px)",
+      });
+
+      // Animate current section scaling down and exiting to middle-right
+      tl.to(
+        currentEl,
+        {
+          scale: 0,
+          yPercent: 100,
+          autoAlpha: 0,
+        },
+        0
+      );
+
+      // Animate previous (nextEl) scaling down into place more gently
+      tl.to(
+        nextEl,
+        {
+          filter: "blur(0px)",
+          yPercent: 0,
+        },
+        0
+      );
+    }
+  };
 
   useEffect(() => {
     let touchStartY = 0;

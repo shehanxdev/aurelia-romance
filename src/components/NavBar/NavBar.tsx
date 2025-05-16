@@ -39,7 +39,7 @@ export const Navbar = () => {
           <img
             src={logoUrl}
             alt="Logo"
-            className="h-8 md:h-18 w-auto cursor-pointer"
+            className="h-8 md:h-10 w-auto cursor-pointer"
           />
         </div>
         <div className="absolute top-4 right-4 md:top-10 md:right-10 backdrop-blur-sm bg-white/60 rounded-lg shadow-md flex items-center justify-center w-10 h-10">
@@ -48,7 +48,7 @@ export const Navbar = () => {
             className="text-gray-700"
             aria-label="Open menu"
           >
-            <List className="cursor-pointer text-2xl md:text-4xl text-primary-dark" />
+            <List className="cursor-pointer text-2xl md:text-3xl text-primary-dark" />
           </button>
         </div>
       </div>
