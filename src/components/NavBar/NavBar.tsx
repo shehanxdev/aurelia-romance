@@ -1,12 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-import { List, X } from '@phosphor-icons/react';
+import { List, X } from "@phosphor-icons/react";
 
-import logoUrl from '../../assets/gold V2.png';
-import { Button } from '../Button/Button';
-import { Link } from '../Link/Link';
+import logoUrl from "../../assets/gold V2.png";
+import { Button } from "../Button/Button";
+import { Link } from "../Link/Link";
 
-export const Navbar = () => {
+interface NavbarProps {
+  readonly isPositionAbsolute?: boolean;
+  readonly bgColor?: string;
+}
+
+export function Navbar({ isPositionAbsolute, bgColor = "white" }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [hasOpened, setHasOpened] = useState(false);
   const drawerRef = useRef<HTMLDivElement | null>(null);
@@ -32,17 +37,29 @@ export const Navbar = () => {
     if (isOpen) setHasOpened(true);
   }, [isOpen]);
   return (
-    <header className="w-full px-4 py-4 md:py-9 absolute z-50 font-serif text-white">
+    <header
+      className={`w-full px-4 py-4 md:py-9 ${
+        isPositionAbsolute ? "absolute" : ""
+      } z-50 font-serif text-white ${bgColor}`}
+    >
       {/* Mobile Navbar */}
       <div className="flex items-center justify-between   ">
-        <div className="absolute top-4 left-4 md:top-10 md:left-10 backdrop-blur-3xl bg-white/30 text-black px-4 py-2 rounded-lg shadow-md">
+        <div
+          className={`${
+            isPositionAbsolute ? "absolute" : ""
+          } top-4 left-4 md:top-10 md:left-10 backdrop-blur-3xl bg-white/30 text-black px-4 py-2 rounded-lg shadow-md`}
+        >
           <img
             src={logoUrl}
             alt="Logo"
             className="h-8 md:h-10 w-auto cursor-pointer"
           />
         </div>
-        <div className="absolute top-4 right-4 md:top-10 md:right-10 backdrop-blur-sm bg-white/60 rounded-lg shadow-md flex items-center justify-center w-10 h-10">
+        <div
+          className={`${
+            isPositionAbsolute ? "absolute" : ""
+          } top-4 right-4 md:top-10 md:right-10 backdrop-blur-sm bg-white/60 rounded-lg shadow-md flex items-center justify-center w-10 h-10`}
+        >
           <button
             onClick={() => setIsOpen(true)}
             className="text-gray-700"
@@ -98,4 +115,4 @@ export const Navbar = () => {
       </div>
     </header>
   );
-};
+}

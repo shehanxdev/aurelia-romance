@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-import img from '../../assets/slider-images/A4 - 1.png';
+import { Navbar } from "@components";
+
+import img from "../../assets/slider-images/A4 - 1.png";
 
 interface HeroSection {
   readonly className?: string;
@@ -54,6 +56,7 @@ export function HeroSection({ className }: HeroSection) {
 
   return (
     <div className={className}>
+      <Navbar isPositionAbsolute={true} bgColor="black" />
       <div
         ref={carouselRef}
         className={`flex w-max h-[100dvh] ${animationClass}`}

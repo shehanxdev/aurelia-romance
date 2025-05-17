@@ -6,13 +6,20 @@ import { cn } from "../../lib";
 const textVariants = cva("", {
   variants: {
     variant: {
-      heading1: "text-[3.75em] md:text-[5em] font-bold",
-      heading2: "text-[2.8125em] md:text-[3.75em] font-bold",
-      body: "text-[1.375em] md:text-[1.875em]",
-      button: "text-[1.125em] md:text-[1.5em] cursor-pointer ",
+      heading1:
+        "text-[2.5em] md:text-[3.75em] lg:text-[4.5em] xl:text-[5em] 2xl:text-[5.5em] font-bold",
+      heading2:
+        "text-[2em] md:text-[2.8125em] lg:text-[3.25em] xl:text-[3.75em] 2xl:text-[4.25em] font-bold",
+      body: "text-[1em] md:text-[1.375em] lg:text-[1.625em] xl:text-[1.875em] 2xl:text-[2em]",
+      bodyItalic:
+        "text-[1em] md:text-[1.2em] lg:text-[1.3em] xl:text-[1.5em] 2xl:text-[2em] italic",
+      button:
+        "text-[1em] md:text-[1.125em] lg:text-[1.25em] xl:text-[1.5em] 2xl:text-[1.625em] cursor-pointer",
 
-      label1: "text-[0.75em] md:text-[1em]",
-      label2: "text-[0.5625em] md:text-[0.8125em]",
+      label1:
+        "text-[0.625em] md:text-[0.75em] lg:text-[0.875em] xl:text-[1em] 2xl:text-[1.125em]",
+      label2:
+        "text-[0.5em] md:text-[0.5625em] lg:text-[0.6875em] xl:text-[0.8125em] 2xl:text-[0.875em]",
     },
     textColor: {
       secondary: "text-secondary",

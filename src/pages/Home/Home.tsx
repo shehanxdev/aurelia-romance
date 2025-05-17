@@ -1,17 +1,24 @@
-import gsap from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import { useEffect, useRef, useState } from 'react';
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { useEffect, useRef, useState } from "react";
 
-import { HeroSection } from './HeroSection';
+import AboutMe from "./AboutMe";
+import { HeroSection } from "./HeroSection";
 
 gsap.registerPlugin(ScrollToPlugin);
 
 const sections = [
-  <HeroSection className="overflow-hidden" />,
-  <div className="h-[150vh] bg-blue-200 p-10">Layer 1 (Tall Content)</div>,
-  <div className="h-screen bg-green-200 p-10">Layer 2</div>,
-  <div className="h-[130vh] bg-red-200 p-10">Layer 3 (Also Tall)</div>,
-  <div className="h-screen bg-yellow-200 p-10">Layer 4</div>,
+  <HeroSection className="overflow-hidden" key={"HeroSection"} />,
+  <AboutMe key={"AboutMection"} />,
+  <div className="h-screen bg-green-200 p-10" key={"dev"}>
+    Layer 2
+  </div>,
+  <div className="h-[130vh] bg-red-200 p-10" key={"AboutMection"}>
+    Layer 3 (Also Tall)
+  </div>,
+  <div className="h-screen bg-yellow-200 p-10" key={"AboutMection"}>
+    Layer 4
+  </div>,
 ];
 
 export function Home() {
@@ -20,140 +27,43 @@ export function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const isAnimating = useRef(false);
 
-  //   if (isAnimating.current || newIndex === currentIndex) return;
-  //   isAnimating.current = true;
-
-  //   const prevEl = sectionRefs.current[currentIndex];
-  //   const nextEl = sectionRefs.current[newIndex];
-
-  //   const tl = gsap.timeline({
-  //     defaults: { duration: 1, ease: "power1.out" },
-  //     onComplete: () => {
-  //       setCurrentIndex(newIndex);
-  //       isAnimating.current = false;
-  //     },
-  //   });
-
-  //   // Prepare next section
-  //   tl.set(nextEl, { autoAlpha: 1, scale: 0, xPercent: 100 });
-
-  //   // Animate prev out and next in simultaneously
-  //   tl.to(prevEl, { autoAlpha: 0, scale: 0, xPercent: 100 }, 0).to(
-  //     nextEl,
-  //     { autoAlpha: 1, scale: 1, xPercent: 0 },
-  //     0
-  //   );
-  // };
-
-  // useEffect(() => {
-  //   const handleWheel = (e: WheelEvent) => {
-  //     if (isAnimating.current) {
-  //       e.preventDefault();
-  //       return;
-  //     }
-  //     const delta = e.deltaY;
-  //     const container = scrollContainers.current[currentIndex];
-  //     if (!container) return;
-
-  //     const atTop = container.scrollTop === 0;
-  //     const atBottom =
-  //       Math.ceil(container.scrollTop + container.clientHeight) >=
-  //       container.scrollHeight;
-
-  //     if (delta > 0) {
-  //       // scrolling down
-  //       if (!atBottom) {
-  //         // let native scroll
-  //         return;
-  //       }
-  //       e.preventDefault();
-  //       if (currentIndex < sections.length - 1)
-  //         animateToSection(currentIndex + 1);
-  //     } else if (delta < 0) {
-  //       // scrolling up
-  //       if (!atTop) {
-  //         // let native scroll
-  //         return;
-  //       }
-  //       e.preventDefault();
-  //       if (currentIndex > 0) animateToSection(currentIndex - 1);
-  //     }
-  //   };
-
-  //   window.addEventListener("wheel", handleWheel, { passive: false });
-  //   return () => window.removeEventListener("wheel", handleWheel);
-  // }, [currentIndex]);
   const animateToSection = (newIndex: number) => {
     if (isAnimating.current || newIndex === currentIndex) return;
     isAnimating.current = true;
 
     const currentEl = sectionRefs.current[currentIndex];
     const nextEl = sectionRefs.current[newIndex];
-    const direction = newIndex > currentIndex ? "down" : "up";
 
     const tl = gsap.timeline({
-      defaults: { duration: 0.7, ease: "power1.in" },
+      defaults: { duration: 1, ease: "power2.out" },
       onComplete: () => {
         setCurrentIndex(newIndex);
         isAnimating.current = false;
       },
     });
 
-    if (direction === "down") {
-      // Prepare next section off-screen, scaled down
-      tl.set(nextEl, {
-        autoAlpha: 1,
-        scale: 0,
-        yPercent: 100,
-      });
-
-      // Slightly scale up current section to simulate zoom-out effect
-      tl.to(
-        currentEl,
-        {
-          filter: "blur(15px)",
+    // Blur out current section
+    tl.to(
+      currentEl,
+      {
+        filter: "blur(100px)",
+        onComplete: () => {
+          // Instantly hide current and show next
+          gsap.set(currentEl, { autoAlpha: 0 });
+          gsap.set(nextEl, { autoAlpha: 1, filter: "blur(100px)" });
         },
-        0
-      );
+      },
+      0
+    );
 
-      // Animate next section scaling up and moving in
-      tl.to(
-        nextEl,
-        {
-          scale: 1,
-          yPercent: 0,
-        },
-        0
-      );
-    } else {
-      // Prepare previous (nextEl) to be larger and in place
-      tl.set(nextEl, {
-        autoAlpha: 1,
-
-        filter: "blur(15px)",
-      });
-
-      // Animate current section scaling down and exiting to middle-right
-      tl.to(
-        currentEl,
-        {
-          scale: 0,
-          yPercent: 100,
-          autoAlpha: 0,
-        },
-        0
-      );
-
-      // Animate previous (nextEl) scaling down into place more gently
-      tl.to(
-        nextEl,
-        {
-          filter: "blur(0px)",
-          yPercent: 0,
-        },
-        0
-      );
-    }
+    // Then unblur next section
+    tl.to(
+      nextEl,
+      {
+        filter: "blur(0px)",
+      },
+      ">0.01"
+    );
   };
 
   useEffect(() => {
@@ -197,6 +107,8 @@ export function Home() {
         handleDirection("down", e);
       } else if (e.key === "ArrowUp") {
         handleDirection("up", e);
+      } else {
+        //typescript rule S126
       }
     };
 
@@ -230,7 +142,7 @@ export function Home() {
     <div className="relative w-full h-screen overflow-hidden">
       {sections.map((section, idx) => (
         <div
-          key={idx}
+          key={section.key}
           className={`absolute top-0 left-0 w-full h-full flex flex-col  overflow-hidden`}
           style={{
             visibility: idx === currentIndex ? "visible" : "hidden",
@@ -240,9 +152,9 @@ export function Home() {
             if (el) sectionRefs.current[idx] = el;
           }}
         >
-          {/* Internal scroll container */}
+          {/* Internal scroll container flex-1 was removed */}
           <div
-            className="flex-1 overflow-y-auto "
+            className="overflow-y-auto "
             ref={(el) => {
               if (el) scrollContainers.current[idx] = el;
             }}
