@@ -38,7 +38,7 @@ export function Navbar({ isPositionAbsolute, bgColor = "white" }: NavbarProps) {
   }, [isOpen]);
   return (
     <header
-      className={`w-full px-4 py-4 md:py-9 ${
+      className={` w-full px-4  md:pt-9 ${
         isPositionAbsolute ? "absolute" : ""
       } z-50 font-serif text-white ${bgColor}`}
     >
@@ -47,7 +47,7 @@ export function Navbar({ isPositionAbsolute, bgColor = "white" }: NavbarProps) {
         <div
           className={`${
             isPositionAbsolute ? "absolute" : ""
-          } top-4 left-4 md:top-10 md:left-10 backdrop-blur-3xl bg-white/30 text-black px-4 py-2 rounded-lg shadow-md`}
+          } top-4 left-4 md:top-10 md:left-10 backdrop-blur-sm bg-white/30 text-black px-4 py-2 rounded-lg shadow-md`}
         >
           <img
             src={logoUrl}

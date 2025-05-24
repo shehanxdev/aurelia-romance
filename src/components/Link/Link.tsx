@@ -1,7 +1,7 @@
-import { cva, VariantProps } from "class-variance-authority";
-import React from "react";
+import { cva, VariantProps } from 'class-variance-authority';
+import React from 'react';
 
-import { cn } from "../../lib";
+import { cn } from '../../lib';
 
 const linkVariants = cva(" cursor-pointer  font-semibold ", {
   variants: {
@@ -28,7 +28,7 @@ const linkVariants = cva(" cursor-pointer  font-semibold ", {
 });
 
 export interface LinkProps
-  extends Readonly<React.HTMLAttributes<HTMLAnchorElement>>,
+  extends Readonly<React.AnchorHTMLAttributes<HTMLAnchorElement>>,
     VariantProps<typeof linkVariants> {
   readonly children: React.ReactNode;
   readonly testId?: string;
@@ -46,6 +46,7 @@ export function Link({
 }: LinkProps) {
   return (
     <a
+      href={props.href}
       className={cn(
         linkVariants({ decoration, textColor, variant }),
         className

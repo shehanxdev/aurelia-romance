@@ -1,7 +1,7 @@
-import { cva, VariantProps } from "class-variance-authority";
-import React from "react";
+import { cva, VariantProps } from 'class-variance-authority';
+import React from 'react';
 
-import { cn } from "../../lib";
+import { cn } from '../../lib';
 
 const textVariants = cva("", {
   variants: {
@@ -11,13 +11,11 @@ const textVariants = cva("", {
       heading2:
         "text-[2em] md:text-[2.8125em] lg:text-[3.25em] xl:text-[3.75em] 2xl:text-[4.25em] font-bold",
       body: "text-[1em] md:text-[1.375em] lg:text-[1.625em] xl:text-[1.875em] 2xl:text-[2em]",
-      bodyItalic:
-        "text-[1em] md:text-[1.2em] lg:text-[1.3em] xl:text-[1.5em] 2xl:text-[2em] italic",
+      bodyItalic: "text-[1.7em]  xl:text-[2em] 2xl:text-[2em] italic",
       button:
-        "text-[1em] md:text-[1.125em] lg:text-[1.25em] xl:text-[1.5em] 2xl:text-[1.625em] cursor-pointer",
+        "text-[1em] md:text-[1.125em] lg:text-[1.25em] xl:text-[2em] 2xl:text-[1.625em] cursor-pointer",
 
-      label1:
-        "text-[0.625em] md:text-[0.75em] lg:text-[0.875em] xl:text-[1em] 2xl:text-[1.125em]",
+      label1: "text-[1.125em]",
       label2:
         "text-[0.5em] md:text-[0.5625em] lg:text-[0.6875em] xl:text-[0.8125em] 2xl:text-[0.875em]",
     },

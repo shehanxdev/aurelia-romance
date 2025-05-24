@@ -1,9 +1,9 @@
-import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { useEffect, useRef, useState } from "react";
+import gsap from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { useEffect, useRef, useState } from 'react';
 
-import AboutMe from "./AboutMe";
-import { HeroSection } from "./HeroSection";
+import AboutMe from './AboutMe';
+import { HeroSection } from './HeroSection';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -35,7 +35,7 @@ export function Home() {
     const nextEl = sectionRefs.current[newIndex];
 
     const tl = gsap.timeline({
-      defaults: { duration: 1, ease: "power2.out" },
+      defaults: { duration: 0.3, ease: "power2.out" },
       onComplete: () => {
         setCurrentIndex(newIndex);
         isAnimating.current = false;
@@ -139,7 +139,7 @@ export function Home() {
   }, [currentIndex]);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-full xl:overflow-hidden bg-[#F8F5F2]">
       {sections.map((section, idx) => (
         <div
           key={section.key}
@@ -154,7 +154,7 @@ export function Home() {
         >
           {/* Internal scroll container flex-1 was removed */}
           <div
-            className="overflow-y-auto "
+            className="overflow-y-auto h-full"
             ref={(el) => {
               if (el) scrollContainers.current[idx] = el;
             }}

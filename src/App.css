@@ -30,6 +30,7 @@
 html {
   font-family: var(--font-family);
   overflow: hidden;
+  background-color: #f3eee7;
 }
 
 @keyframes portalZoomIn {

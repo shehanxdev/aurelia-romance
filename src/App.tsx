@@ -1,10 +1,10 @@
-import "./App.css";
+import './App.css';
 
-import { Home } from "@pages";
+import { Home } from '@pages';
 
 function App() {
   return (
-    <div className="">
+    <div className="h-screen">
       {/* <ReactLenis
         options={{
           duration: 1.2,
