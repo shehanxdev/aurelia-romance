@@ -40,7 +40,7 @@ export function AboutMe() {
               The Aurelia Romance Team
             </Text>
           </div>
-          <div className="flex flex-col xl:flex-row justify-between w-full xl:items-end-safe">
+          <div className="flex flex-col xl:flex-row justify-between w-full xl:items-end-safe pb-[100px] xl:pb-0">
             <Link
               href="https://www.facebook.com/share/16J3zTjRzp/?mibextid=wwXIfr"
               target="_blank"
