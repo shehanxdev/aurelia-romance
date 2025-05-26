@@ -1,6 +1,6 @@
-import { Link, Navbar, Text } from '@components';
+import { Link, Navbar, Text } from "@components";
 
-import STUDIO_IMAGE_URL from '../../assets/images/studio.avif';
+import STUDIO_IMAGE_URL from "../../assets/images/studio.avif";
 
 export function AboutMe() {
   return (
@@ -26,7 +26,7 @@ export function AboutMe() {
         </div>
 
         <div className="w-[90dvw] xl:w-[50dvw] flex flex-col h-full justify-between py-8 gap-18">
-          <div className="grow font-bold flex flex-col justify-center">
+          <div className="grow font-bold hidden xl:flex flex-col justify-center ">
             <Text variant="bodyItalic">
               Dear Friend,
               <br />
@@ -40,7 +40,14 @@ export function AboutMe() {
               The Aurelia Romance Team
             </Text>
           </div>
-          <div className="flex flex-col xl:flex-row justify-between w-full xl:items-end-safe pb-[100px] xl:pb-0">
+          <div className="grow font-bold flex flex-col justify-center items-center xl:hidden text-center">
+            <Text className="font-extrabold" variant="body">
+              Welcome to Aurelia Romance where photography meets poetry in light
+              and emotion. We capture not just moments, but the soul behind
+              them, crafting timeless stories with heart and artistry.
+            </Text>
+          </div>
+          <div className="flex flex-col xl:flex-row justify-between w-full items-center xl:items-end-safe pb-[100px] xl:pb-0 ">
             <Link
               href="https://www.facebook.com/share/16J3zTjRzp/?mibextid=wwXIfr"
               target="_blank"
