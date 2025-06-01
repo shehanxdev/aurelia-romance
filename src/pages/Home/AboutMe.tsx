@@ -1,6 +1,6 @@
-import { Link, Navbar, Text } from '@components';
+import { Link, Navbar, Text } from "@components";
 
-import STUDIO_IMAGE_URL from '../../assets/images/studio.avif';
+import STUDIO_IMAGE_URL from "../../assets/images/studio.avif";
 
 export function AboutMe() {
   return (
@@ -14,11 +14,11 @@ export function AboutMe() {
             className="w-full h-screen full object-cover self-start grayscale hover:grayscale-0 transition-all duration-500 ease-in-out"
           />
         </div>
-        <div className="xl:hidden flex w-full sticky top-0">
+        <div className="xl:hidden flex w-full ">
           <img
             src={STUDIO_IMAGE_URL}
             alt="About Me"
-            className="w-full h-[50dvh] xl:h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 ease-in-out sticky top-0"
+            className="w-full h-screen xl:h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 ease-in-out sticky top-0"
           />
         </div>
 
@@ -28,7 +28,7 @@ export function AboutMe() {
               Welcome to Aurelia Romance
             </Text>
             <div>
-              <Text variant="heading2">The Philosophy</Text>
+              <Text variant="heading2">Our Philosophy</Text>
               <Text className="font-light" variant="body">
                 Photography is more than seeing it is sensing. It’s not about
                 capturing perfection, but preserving the invisible emotion that
@@ -38,17 +38,7 @@ export function AboutMe() {
               </Text>
             </div>
             <div>
-              <Text variant="heading2">Behind the Lens</Text>
-              <Text className="font-light" variant="body">
-                We are a studio of visual storytellers, capturing emotion
-                through light and artistry. Our signature style blends fine art
-                with soul, crafting timeless, poetic imagery. What makes us
-                unique is how deeply we see you beyond the surface. Every frame
-                is intentional, elegant, and personal.
-              </Text>
-            </div>
-            <div>
-              <Text variant="heading2">Aurelia Experience</Text>
+              <Text variant="heading2">Our Process</Text>
               <Text className="font-light" variant="body">
                 Our process begins with listening we tailor each session to your
                 story. On shoot day, we guide gently, letting real emotion lead
