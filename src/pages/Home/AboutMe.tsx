@@ -18,7 +18,7 @@ export function AboutMe() {
           <img
             src={STUDIO_IMAGE_URL}
             alt="About Me"
-            className="w-full h-screen xl:h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 ease-in-out sticky top-0"
+            className="w-full h-[60dvh] xl:h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 ease-in-out sticky top-0"
           />
         </div>
 
