@@ -1,52 +1,64 @@
-import { Link, Navbar, Text } from "@components";
+import { Link, Navbar, Text } from '@components';
 
-import STUDIO_IMAGE_URL from "../../assets/images/studio.avif";
+import STUDIO_IMAGE_URL from '../../assets/images/studio.avif';
 
 export function AboutMe() {
   return (
-    <div className="flex flex-col  h-full xl:overflow-y-hidden ">
+    <div className="flex flex-col">
       <Navbar isPositionAbsolute={true} />
-      <div
-        className="flex h-full flex-col xl:flex-row justify-between items-center xl:pr-24  grow 
-     xl:gap-14 "
-      >
-        <div className="relative h-full max-w-[800px] w-[35dvw] grow  hidden xl:block">
+      <div className="flex  flex-col xl:flex-row xl:pr-24 xl:gap-14 ">
+        <div className="h-full max-w-[900px] w-[40dvw] hidden xl:block sticky top-0">
           <img
             src={STUDIO_IMAGE_URL}
             alt="About Me"
-            className="w-full h-full object-cover sticky top-0 grayscale hover:grayscale-0 transition-all duration-500 ease-in-out"
+            className="w-full h-screen full object-cover self-start grayscale hover:grayscale-0 transition-all duration-500 ease-in-out"
           />
         </div>
-        <div className=" xl:hidden  flex relative w-full ">
+        <div className="xl:hidden flex w-full sticky top-0">
           <img
             src={STUDIO_IMAGE_URL}
             alt="About Me"
-            className="w-full h-[50dvh] xl:h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 ease-in-out"
+            className="w-full h-[50dvh] xl:h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 ease-in-out sticky top-0"
           />
         </div>
 
-        <div className="w-[90dvw] xl:w-[50dvw] flex flex-col h-full justify-between py-8 gap-18">
-          <div className="grow font-bold hidden xl:flex flex-col justify-center ">
-            <Text variant="bodyItalic">
-              Dear Friend,
-              <br />
-              <br />
-              Welcome to Aurelia Romance where photography meets poetry in light
-              and emotion. We capture not just moments, but the soul behind
-              them, crafting timeless stories with heart and artistry.
-              <br />
-              <br />
-              Warmly, <br />
-              The Aurelia Romance Team
+        <div className="w-[90dvw] md:w-[70dvw] xl:w-[50dvw] flex flex-col h-full justify-between py-8 gap-18 m-auto xl:m-0">
+          <div className="grow font-bold flex flex-col justify-center text-center  gap-12 xl:gap-32 ">
+            <Text className="leading-12 md:leading-20" variant="heading1">
+              Welcome to Aurelia Romance
             </Text>
+            <div>
+              <Text variant="heading2">The Philosophy</Text>
+              <Text className="font-light" variant="body">
+                Photography is more than seeing it is sensing. It’s not about
+                capturing perfection, but preserving the invisible emotion that
+                lives between glances, between gestures, between heartbeats. At
+                Aurelia Romance, every image is a delicate dialogue between
+                shadow and soul. An heirloom of feeling. A poem of light.
+              </Text>
+            </div>
+            <div>
+              <Text variant="heading2">Behind the Lens</Text>
+              <Text className="font-light" variant="body">
+                We are a studio of visual storytellers, capturing emotion
+                through light and artistry. Our signature style blends fine art
+                with soul, crafting timeless, poetic imagery. What makes us
+                unique is how deeply we see you beyond the surface. Every frame
+                is intentional, elegant, and personal.
+              </Text>
+            </div>
+            <div>
+              <Text variant="heading2">Aurelia Experience</Text>
+              <Text className="font-light" variant="body">
+                Our process begins with listening we tailor each session to your
+                story. On shoot day, we guide gently, letting real emotion lead
+                the way. Each image is edited with care, preserving both beauty
+                and feeling. With us, you're not just photographed you're deeply
+                seen and artfully remembered.
+              </Text>
+            </div>
           </div>
-          <div className="grow font-bold flex flex-col justify-center items-center xl:hidden text-center">
-            <Text className="font-extrabold" variant="body">
-              Welcome to Aurelia Romance where photography meets poetry in light
-              and emotion. We capture not just moments, but the soul behind
-              them, crafting timeless stories with heart and artistry.
-            </Text>
-          </div>
+
           <div className="flex flex-col xl:flex-row justify-between w-full items-center xl:items-end-safe pb-[100px] xl:pb-0 ">
             <Link
               href="https://www.facebook.com/share/16J3zTjRzp/?mibextid=wwXIfr"
