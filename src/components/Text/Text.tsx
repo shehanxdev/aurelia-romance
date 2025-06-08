@@ -10,8 +10,9 @@ const textVariants = cva("", {
         "text-[2.9em] md:text-[4.2em] lg:text-[4.5em] xl:text-[5em] 2xl:text-[5.5em] font-extrabold",
       heading2:
         "text-[2em] md:text-[2.8125em] lg:text-[3em] xl:text-[3em] 2xl:text-[3em]",
-      body: "text-[1.5em]  xl:text-[2em] 2xl:text-[2em] ",
-      bodyItalic: "text-[1.5em]  xl:text-[2em] 2xl:text-[2em] italic",
+      body: "text-[1.5em] md:text-[1.9em] xl:text-[2em] 2xl:text-[2em] ",
+      bodyItalic:
+        "text-[1.5em] md:text-[1.9em] xl:text-[2em] 2xl:text-[2em] italic",
       button:
         "text-[1em] md:text-[1.125em] lg:text-[1.25em] xl:text-[2em] 2xl:text-[1.625em] cursor-pointer",
 
