@@ -4,7 +4,7 @@ import STUDIO_IMAGE_URL from "../../assets/images/studio.avif";
 
 export function AboutMe() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col relative">
       <Navbar isPositionAbsolute={true} />
       <div className="flex  flex-col xl:flex-row xl:pr-24 xl:gap-14 ">
         <div className="h-full  w-[50dvw] hidden xl:block sticky top-0">

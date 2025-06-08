@@ -1,10 +1,12 @@
+import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
 
 import { List, X } from "@phosphor-icons/react";
 
 import logoUrl from "../../assets/gold V2.png";
 import { Button } from "../Button/Button";
-import { Link } from "../Link/Link";
+import { Link } from "../Link";
+import { Text } from "../Text";
 
 interface NavbarProps {
   readonly isPositionAbsolute?: boolean;
@@ -13,10 +15,30 @@ interface NavbarProps {
 
 export function Navbar({ isPositionAbsolute, bgColor = "white" }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [hasOpened, setHasOpened] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const drawerRef = useRef<HTMLDivElement | null>(null);
+  const overlayRef = useRef<HTMLDivElement | null>(null);
 
-  // Close drawer when clicking outside
+  // Animate drawer and overlay
+  useEffect(() => {
+    if (!drawerRef.current || !overlayRef.current) return;
+
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.out", duration: 0.4 },
+    });
+
+    if (isOpen) {
+      tl.set(overlayRef.current, { visibility: "visible" })
+        .to(overlayRef.current, { opacity: 1 })
+        .fromTo(drawerRef.current, { y: "100%" }, { y: 0 }, "<");
+    } else {
+      tl.to(drawerRef.current, { y: "100%" })
+        .to(overlayRef.current, { opacity: 0 }, "<")
+        .set(overlayRef.current, { visibility: "hidden" });
+    }
+  }, [isOpen]);
+
+  // Close on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -26,24 +48,29 @@ export function Navbar({ isPositionAbsolute, bgColor = "white" }: NavbarProps) {
         setIsOpen(false);
       }
     };
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleEsc);
     }
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEsc);
     };
   }, [isOpen]);
-  useEffect(() => {
-    if (isOpen) setHasOpened(true);
-  }, [isOpen]);
+
   return (
     <header
-      className={` w-full px-4  md:pt-9 ${
+      className={`w-full px-4 md:pt-9 ${
         isPositionAbsolute ? "absolute" : ""
       } z-50 font-serif text-white ${bgColor}`}
     >
-      {/* Mobile Navbar */}
-      <div className="flex items-center justify-between   ">
+      {/* Top bar */}
+      <div className="flex items-center justify-between">
         <div
           className={`${
             isPositionAbsolute ? "absolute" : ""
@@ -55,6 +82,7 @@ export function Navbar({ isPositionAbsolute, bgColor = "white" }: NavbarProps) {
             className="h-8 md:h-10 w-auto cursor-pointer"
           />
         </div>
+
         <div
           className={`${
             isPositionAbsolute ? "absolute" : ""
@@ -72,42 +100,44 @@ export function Navbar({ isPositionAbsolute, bgColor = "white" }: NavbarProps) {
 
       {/* Overlay */}
       <div
-        className={`fixed inset-0 z-40 flex items-center justify-center transition-opacity backdrop-blur-sm duration-300 ease-in-out ${
-          isOpen
-            ? "opacity-100 portal-zoom-in"
-            : hasOpened
-            ? "opacity-0 pointer-events-none portal-zoom-out"
-            : "opacity-0 pointer-events-none"
-        } bg-black/60`}
+        ref={overlayRef}
+        className="fixed inset-0 z-50 bg-black/40 backdrop-blur-3xl opacity-0 invisible"
       >
-        {/* Side Drawer */}
+        {/* Bottom drawer */}
         <div
           ref={drawerRef}
-          className="w-[100dvw] h-[100dvh] bg-white/10 backdrop-blur-2xl border-r border-white/20 shadow-2xl p-6 z-50"
+          className="absolute bottom-0 left-0 right-0 bg-white text-white rounded-t-2xl shadow-xl w-full h-[90vh] py-6 px-6 transform translate-y-full overflow-y-auto"
         >
-          <div className="flex justify-end mb-8">
+          {/* Close Button */}
+          <div className="flex justify-end mb-4">
             <Button
-              variant={"iconButton"}
+              variant="iconButton"
               onClick={() => setIsOpen(false)}
               aria-label="Close menu"
             >
               <X
-                className="cursor-pointer text-white hover:text-gold transition"
+                className="cursor-pointer text-secondary hover:text-gold transition"
                 size={24}
               />
             </Button>
           </div>
 
-          <nav className="flex flex-col gap-6">
-            {["Home", "Gallery", "Services", "Contact"].map((item) => (
+          {/* Navigation */}
+          <nav className="flex flex-col gap-6 text-center">
+            {["Home", "Gallery", "Services", "Contact"].map((item, index) => (
               <Link
                 key={item}
                 variant="large"
                 decoration="noUnderline"
-                textColor="secondary"
-                className="text-lg text-white hover:text-gold transition-colors border-b border-white/10 pb-2"
+                className={`text-lg text-white hover:text-gold transition-all duration-300 border-b border-white/10 pb-2 ${
+                  hoveredIndex !== null && hoveredIndex !== index
+                    ? "blur-sm opacity-60"
+                    : ""
+                }`}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
               >
-                {item}
+                <Text variant="heading1">{item}</Text>
               </Link>
             ))}
           </nav>
