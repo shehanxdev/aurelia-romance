@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { Navbar } from "@components";
 
-import img from "../../../assets/slider-images/A4 - 1.png";
+import img from "../../../assets/slider-images/A4 - 1.avif";
 
 interface HeroSection {
   readonly className?: string;

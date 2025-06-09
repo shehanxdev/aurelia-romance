@@ -1,10 +1,10 @@
-import { Text } from "@components";
+import { Navbar, Text } from "@components";
 
-import CASUAL_SHOOT_IMAGE from "../../../assets/images/casualImage.jpg";
-import ENGAGEMENT_IMAGE from "../../../assets/images/engagementImage.jpg";
-import HOMECOMMING_IMAGE from "../../../assets/images/homecommingImage.jpg";
-import PRESHOOT_IMAGE from "../../../assets/images/preshootImage.jpg";
-import WEDDING_IMAGE from "../../../assets/images/weddingImage.jpg";
+import CASUAL_SHOOT_IMAGE from "../../../assets/images/casualImage.avif";
+import ENGAGEMENT_IMAGE from "../../../assets/images/engagementImage.avif";
+import HOMECOMMING_IMAGE from "../../../assets/images/homecommingImage.avif";
+import PRESHOOT_IMAGE from "../../../assets/images/preshootImage.avif";
+import WEDDING_IMAGE from "../../../assets/images/weddingImage.avif";
 
 const services = [
   { title: "Weddings", image: WEDDING_IMAGE },
@@ -17,6 +17,7 @@ const services = [
 export function Services() {
   return (
     <div className="w-full">
+      <Navbar isPositionAbsolute={true} />
       {services.map((service) => (
         <div
           key={service.title}
