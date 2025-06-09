@@ -1,6 +1,6 @@
 import { Link, Navbar, Text } from "@components";
 
-import STUDIO_IMAGE_URL from "../../assets/images/studio.avif";
+import STUDIO_IMAGE_URL from "../../../assets/images/studio.avif";
 
 export function AboutMe() {
   return (

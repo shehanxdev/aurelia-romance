@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -14,7 +15,9 @@ if (rootElement) {
       <BrowserRouter>
         <SpeedInsights />
         <Analytics />
-        <App />
+        <ParallaxProvider>
+          <App />
+        </ParallaxProvider>
       </BrowserRouter>
     </StrictMode>
   );

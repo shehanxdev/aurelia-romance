@@ -1,18 +1,17 @@
-import gsap from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import { useEffect, useRef, useState } from 'react';
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { useEffect, useRef, useState } from "react";
 
-import AboutMe from './AboutMe';
-import { HeroSection } from './HeroSection';
+import AboutMe from "./sections/AboutMe";
+import { HeroSection } from "./sections/HeroSection";
+import { Services } from "./sections/Services";
 
 gsap.registerPlugin(ScrollToPlugin);
 
 const sections = [
   <HeroSection className="overflow-hidden" key={"HeroSection"} />,
   <AboutMe key={"AboutMection"} />,
-  <div className="h-screen bg-green-200 p-10" key={"dev"}>
-    Layer 2
-  </div>,
+  <Services key={"ServicesSection"} />,
   <div className="h-[130vh] bg-red-200 p-10" key={"AboutMection"}>
     Layer 3 (Also Tall)
   </div>,
