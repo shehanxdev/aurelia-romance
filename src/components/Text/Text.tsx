@@ -16,7 +16,7 @@ const textVariants = cva("", {
       button:
         "text-[1em] md:text-[1.125em] lg:text-[1.25em] xl:text-[2em] 2xl:text-[1.625em] cursor-pointer",
 
-      label1: "text-[1.125em]",
+      label1: "text-[1em] md:text-[1.125em]",
       label2:
         "text-[0.5em] md:text-[0.5625em] lg:text-[0.6875em] xl:text-[0.8125em] 2xl:text-[0.875em]",
     },
