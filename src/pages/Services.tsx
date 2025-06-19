@@ -1,3 +1,6 @@
+import gsap from "gsap";
+import { useEffect, useRef, useState } from "react";
+
 import { Text } from "@components";
 
 import CASUAL_SHOOT_IMAGE from "../assets/images/casualImage.avif";
@@ -15,36 +18,75 @@ const services = [
 ];
 
 export function Services() {
-  return (
-    <div className="w-full">
-      {services.map((service) => (
-        <div
-          key={service.title}
-          className="relative w-[100dvw] h-[100vh] overflow-hidden"
-        >
-          <div
-            className="h-full bg-center bg-cover bg-fixed bg-no-repeat"
-            style={{ backgroundImage: `url(${service.image})` }}
-          >
-            <div className="w-full h-full bg-black/70 flex flex-col items-start justify-end p-4">
-              <Text as={"h1"} variant="heading1" className="text-white ">
-                {service.title}
-              </Text>
-              {/* <Text
-                className="w-[80dvw] md:w-[40dvw] xl:w-[20dvw] text-white font-family-inter"
-                variant="label1"
-              >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-                laboriosam provident earum nemo, doloribus soluta voluptate
-                voluptates maxime a distinctio illum porro omnis dolor eaque
-                quod quae suscipit veniam rem.
-              </Text> */}
-            </div>
-          </div>
+  const [activeIndex, setActiveIndex] = useState(0);
+  const imageRef = useRef<HTMLImageElement>(null);
 
-          <div className="absolute inset-0 bg-black/20" />
+  const handleServiceClick = (index: number) => {
+    if (index === activeIndex) return;
+
+    // Animate fade out, change image, fade in
+    const tl = gsap.timeline();
+    tl.to(imageRef.current, {
+      opacity: 0,
+      duration: 0.4,
+      onComplete: () => {
+        setActiveIndex(index); // triggers re-render and updates image
+      },
+    }).to(imageRef.current, {
+      opacity: 1,
+      duration: 0.4,
+    });
+  };
+
+  return (
+    <div className="flex flex-col">
+      <div className="md:w-[60dvw] m-auto flex flex-col mb-8 md:mb-20">
+        <Text variant="headingxl" className="text-center md:text-left">
+          EXPLORE
+        </Text>
+        <Text
+          variant="headingxl"
+          className="text-center md:text-right leading-none"
+        >
+          SERVICES
+        </Text>
+      </div>
+
+      <div className="flex flex-col xl:flex-row h-[100vh] w-full bg-white">
+        {/* Left Image Section */}
+        <div className="relative w-full xl:w-2/3 h-[50vh] xl:h-full">
+          <img
+            ref={imageRef}
+            key={services[activeIndex].image}
+            src={services[activeIndex].image}
+            alt={services[activeIndex].title}
+            className="w-full h-full object-cover transition duration-300 ease-in-out"
+          />
+          <div className="absolute inset-0 bg-black/50" />
         </div>
-      ))}
+
+        {/* Right List Section */}
+        <div className="w-full xl:w-1/3 h-full flex flex-col items-center justify-center px-4 py-8 gap-6">
+          <div className="flex flex-col gap-4 mt-8">
+            {services.map((service, index) => (
+              <button
+                key={service.title}
+                onClick={() => handleServiceClick(index)}
+                className={`transition transform text-xl  ${
+                  index === activeIndex
+                    ? " text-primary-dark underline"
+                    : " text-gray-700 hover:scale-105"
+                }`}
+              >
+                <Text className="text-left" variant="heading2">
+                  {" "}
+                  {service.title}
+                </Text>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
