@@ -1,12 +1,12 @@
-import gsap from "gsap";
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router"; // ✅
+import gsap from 'gsap';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router'; // ✅
 
-import { List, X } from "@phosphor-icons/react";
+import { X } from '@phosphor-icons/react';
 
-import logoUrl from "../../assets/gold V2.png";
-import { Button } from "../Button/Button";
-import { Text } from "../Text";
+import logoUrl from '../../assets/gold V2.png';
+import { Button } from '../Button/Button';
+import { Text } from '../Text';
 
 interface NavbarProps {
   isPositionAbsolute?: boolean;
@@ -17,11 +17,7 @@ interface NavbarProps {
   }>;
 }
 
-export function NavBar({
-  isPositionAbsolute,
-  bgColor = "white",
-  layoutRef,
-}: NavbarProps) {
+export function NavBar({ bgColor = "white", layoutRef }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const drawerRef = useRef<HTMLDivElement | null>(null);
