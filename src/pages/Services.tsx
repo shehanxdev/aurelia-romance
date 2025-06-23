@@ -1,13 +1,13 @@
-import gsap from "gsap";
-import { useEffect, useRef, useState } from "react";
+import gsap from 'gsap';
+import { useRef, useState } from 'react';
 
-import { Text } from "@components";
+import { Text } from '@components';
 
-import CASUAL_SHOOT_IMAGE from "../assets/images/casualImage.avif";
-import ENGAGEMENT_IMAGE from "../assets/images/engagementImage.avif";
-import HOMECOMMING_IMAGE from "../assets/images/homecommingImage.avif";
-import PRESHOOT_IMAGE from "../assets/images/preshootImage.avif";
-import WEDDING_IMAGE from "../assets/images/weddingImage.avif";
+import CASUAL_SHOOT_IMAGE from '../assets/images/casualImage.avif';
+import ENGAGEMENT_IMAGE from '../assets/images/engagementImage.avif';
+import HOMECOMMING_IMAGE from '../assets/images/homecommingImage.avif';
+import PRESHOOT_IMAGE from '../assets/images/preshootImage.avif';
+import WEDDING_IMAGE from '../assets/images/weddingImage.avif';
 
 const services = [
   { title: "Weddings", image: WEDDING_IMAGE },
