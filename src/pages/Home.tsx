@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
-import img from "../../../assets/slider-images/A4 - 1.avif";
+import SLIDER_IMAGE from "../assets/images/HomePageSliderImage.avif";
 
 interface HeroSection {
   readonly className?: string;
 }
-export function HeroSection({ className }: HeroSection) {
+export function Home({ className }: HeroSection) {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [animationClass, setAnimationClass] = useState("");
   const totalImages = 2;
@@ -61,7 +61,7 @@ export function HeroSection({ className }: HeroSection) {
         {Array.from({ length: totalImages }).map((_, idx) => (
           <img
             key={idx}
-            src={img}
+            src={SLIDER_IMAGE}
             alt="carousel"
             onLoad={handleImageLoad}
             className="h-full w-auto object-cover"
