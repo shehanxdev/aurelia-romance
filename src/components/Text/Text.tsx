@@ -6,12 +6,12 @@ import { cn } from "../../lib";
 const textVariants = cva("", {
   variants: {
     variant: {
-      headingxl: "text-[50px] md:text-[100px] xl:text-[200px] font-bold",
+      headingxl: "text-[20dvw] md:text-[100px] xl:text-[200px] font-bold",
       heading1:
         "text-[2.9em] md:text-[4.2em] lg:text-[4.5em] xl:text-[5em] 2xl:text-[5.5em] font-extrabold",
       heading2:
         "text-[2em] md:text-[2.8125em] lg:text-[3em] xl:text-[3em] 2xl:text-[3em]",
-      body: "text-[1.5em] md:text-[1.9em] xl:text-[2em] 2xl:text-[2em] ",
+      body: "text-[1.5em] md:text-[1.9em] xl:text-[2em] 2xl:text-[2em] leading-snug",
       bodyItalic:
         "text-[1.5em] md:text-[1.9em] xl:text-[2em] 2xl:text-[2em] italic",
       button:
