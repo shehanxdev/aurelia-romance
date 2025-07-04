@@ -14,8 +14,7 @@ function App() {
 
   return (
     <div className="h-screen overflow-auto">
-      <NavBar layoutRef={layoutRef} isPositionAbsolute={true} />{" "}
-      {/* Pass ref to Navbar */}
+      <NavBar layoutRef={layoutRef} /> {/* Pass ref to Navbar */}
       <Layout ref={layoutRef}>
         <Routes>
           <Route path="/" element={<Home />} />
