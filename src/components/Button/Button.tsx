@@ -1,11 +1,11 @@
-import { cva, VariantProps } from "class-variance-authority";
-import React from "react";
+import { cva, VariantProps } from 'class-variance-authority';
+import React from 'react';
 
-import { cn } from "../../lib/utils";
-import { Text } from "../Text";
+import { cn } from '../../lib/utils';
+import { Text } from '../Text';
 
 const buttonVariants = cva(
-  "rounded-full w-full h-[2.25em] md:h-[3em] cursor-pointer transition-colors duration-200 ease-in-out  ",
+  "rounded-full w-full h-[3.3em] md:h-[4em] cursor-pointer transition-colors duration-200 ease-in-out",
   {
     variants: {
       variant: {

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import SLIDER_IMAGE from "../assets/images/HomePageSliderImage.avif";
+import SLIDER_IMAGE from "../assets/images/HomePageSliderImage.png";
 
 interface HeroSection {
   readonly className?: string;
@@ -10,7 +10,7 @@ export function Home({ className }: HeroSection) {
   const [animationClass, setAnimationClass] = useState("");
   const totalImages = 2;
   const [imagesLoaded, setImagesLoaded] = useState(0);
-  const SLIDE_RATE_ADJUSTER = 100;
+  const SLIDE_RATE_ADJUSTER = 55;
 
   useEffect(() => {
     if (imagesLoaded < totalImages || !carouselRef.current) return undefined;
@@ -21,6 +21,7 @@ export function Home({ className }: HeroSection) {
 
     const keyframeName = "scroll-marquee-dynamic";
     const duration = totalWidth / SLIDE_RATE_ADJUSTER;
+    console.log(duration);
 
     const style = `
       @keyframes ${keyframeName} {

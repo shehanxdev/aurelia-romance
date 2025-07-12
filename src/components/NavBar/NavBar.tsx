@@ -25,7 +25,7 @@ export function NavBar({ layoutRef }: NavbarProps) {
   const navigate = useNavigate();
 
   const routes: RouteItem[] = [
-    { title: "Gallery", path: "/" },
+    { title: "Gallery", path: "/gallery" },
     { title: "About", path: "/about" },
     { title: "Contact", path: "/" },
   ];
@@ -71,10 +71,8 @@ export function NavBar({ layoutRef }: NavbarProps) {
   };
 
   return (
-    <header
-      className={`fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 font-serif`}
-    >
-      <div className="flex items-center justify-center gap-4 px-4 py-3 bg-white/80 backdrop-blur-md text-black rounded-full shadow-lg w-[90dvw] md:w-fit ">
+    <header className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 font-serif">
+      <div className="flex items-center justify-center gap-4 px-4 py-3 bg-white/80 backdrop-blur-md text-black rounded-full shadow-lg w-[90dvw] md:w-fit">
         <button
           onClick={() => handleNavigate("/")}
           className="p-0 border-none bg-transparent cursor-pointer"
