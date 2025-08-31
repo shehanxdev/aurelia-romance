@@ -1,9 +1,9 @@
-import gsap from 'gsap';
-import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router';
+import gsap from "gsap";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router";
 
-import logoUrl from '../../assets/gold V2.png';
-import { Text } from '../Text';
+import logoUrl from "../../assets/gold V2.png";
+import { Text } from "../Text";
 
 interface NavbarProps {
   layoutRef?: React.RefObject<{
@@ -26,7 +26,7 @@ export function NavBar({ layoutRef }: NavbarProps) {
 
   const routes: RouteItem[] = [
     { title: "Gallery", path: "/gallery" },
-    { title: "About", path: "/about" },
+    { title: "Services", path: "/services" },
     { title: "Contact", path: "/" },
   ];
 

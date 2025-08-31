@@ -1,8 +1,8 @@
-import { cva, VariantProps } from 'class-variance-authority';
-import React from 'react';
+import { cva, VariantProps } from "class-variance-authority";
+import React from "react";
 
-import { cn } from '../../lib/utils';
-import { Text } from '../Text';
+import { cn } from "../../lib/utils";
+import { Text } from "../Text";
 
 const buttonVariants = cva(
   "rounded-full w-full h-[3.3em] md:h-[4em] cursor-pointer transition-colors duration-200 ease-in-out",
@@ -29,6 +29,7 @@ export interface ButtonProps
   > {
   readonly children: React.ReactNode;
   readonly testId?: string;
+  readonly textClassName?: string;
 }
 
 export function Button({
@@ -36,7 +37,7 @@ export function Button({
   testId,
   className,
   variant = "filled",
-
+  textClassName,
   ...props
 }: ButtonProps) {
   return (
@@ -53,7 +54,7 @@ export function Button({
             {/* Note: leading-none and contents were used to correct centering
         most probably caused by line-height */}
             <Text
-              className="leading-none contents"
+              className={`leading-none contents ${textClassName}`}
               variant="button"
               textColor={variant === "filled" ? "white" : "black"}
             >

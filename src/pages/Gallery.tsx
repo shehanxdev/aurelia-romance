@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { Text } from "@components";
+import { GalleryImage, Text } from "@components";
 
 import IMG1 from "../assets/images/C123324.jpg";
 import IMG2 from "../assets/images/c234234.jpg";
@@ -99,12 +99,7 @@ export function Gallery() {
             className="overflow-y-auto h-full px-1 space-y-2 "
           >
             {columnImages.map((url, imgIndex) => (
-              <img
-                key={imgIndex}
-                src={url}
-                alt={`Gallery ${colIndex}-${imgIndex}`}
-                className="w-full rounded shadow-md object-cover transition-transform duration-300 ease-in-out hover:scale-90"
-              />
+              <GalleryImage url={url} alt={`${imgIndex}`} />
             ))}
           </div>
         ))}
