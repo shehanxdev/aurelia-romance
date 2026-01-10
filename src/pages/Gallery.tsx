@@ -51,6 +51,12 @@ export const imageData: ImageType[] = [
   },
 ];
 
+type GalleryImageItem = {
+  url: string;
+  albumId: string;
+  albumType: string;
+};
+
 // Helper to chunk array into N columns
 function chunkArray<T>(arr: T[], columns: number): T[][] {
   const chunked: T[][] = Array.from({ length: columns }, () => []);
@@ -74,9 +80,16 @@ export function Gallery() {
   }, []);
 
   // Get all images into a flat array
-  const allImages = useMemo(() => {
-    return imageData.flatMap((item) => item.urlList);
+  const allImages = useMemo<GalleryImageItem[]>(() => {
+    return imageData.flatMap((item) =>
+      item.urlList.map((url) => ({
+        url,
+        albumId: item.albumId,
+        albumType: item.type,
+      }))
+    );
   }, []);
+  console.log(allImages);
 
   // Distribute images across columns
   const columns = useMemo(
@@ -98,8 +111,8 @@ export function Gallery() {
             key={colIndex}
             className="overflow-y-auto h-full px-1 space-y-2 "
           >
-            {columnImages.map((url, imgIndex) => (
-              <GalleryImage url={url} alt={`${imgIndex}`} />
+            {columnImages.map((galleryImageItem, imgIndex) => (
+              <GalleryImage url={galleryImageItem.url} alt={`${imgIndex}`}  albumId={galleryImageItem.albumId} albumType={galleryImageItem.albumType}/>
             ))}
           </div>
         ))}
