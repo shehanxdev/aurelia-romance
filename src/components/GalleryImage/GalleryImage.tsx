@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Button } from "../Button";
 
-export function GalleryImage({ url, alt }: { url: string; alt: string }) {
+export function GalleryImage({ url, alt, albumId, albumType }: { url: string; alt: string; albumId: string; albumType: string }) {
   const [showOverlay, setShowOverlay] = useState(false);
 
   return (
