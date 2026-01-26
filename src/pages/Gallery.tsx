@@ -100,12 +100,12 @@ export function Gallery() {
   return (
     <div>
       <Text
-        className="text-center leading-none w-[90%] m-auto pt-9"
+        className="text-center leading-none w-[90%] m-auto py-12 md:py-20"
         variant="headingxl"
       >
         <span className="text-primary ">Aurelia </span>Gallery
       </Text>
-      <div className=" h-[100dvh] mt-[40px] lg:mt-[100px] grid grid-cols-2 md:grid-cols-3 ">
+      <div className=" h-[100dvh] mt-[40px] lg:mt-[40px] grid grid-cols-2 md:grid-cols-3 ">
         {columns.map((columnImages, colIndex) => (
           <div
             key={colIndex}

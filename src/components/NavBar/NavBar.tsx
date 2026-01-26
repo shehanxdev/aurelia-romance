@@ -27,7 +27,7 @@ export function NavBar({ layoutRef }: NavbarProps) {
   const routes: RouteItem[] = [
     { title: "Gallery", path: "/gallery" },
     { title: "Services", path: "/services" },
-    { title: "Contact", path: "/" },
+    { title: "Contact", path: "/contact" },
   ];
 
   useEffect(() => {

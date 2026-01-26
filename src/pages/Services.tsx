@@ -16,7 +16,7 @@ const services = [
 
 export function Services() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col py-12 md:py-20">
       {/* Explore Services Heading */}
       <div className="w-[90%] leading-none flex flex-col m-auto  mb-[40px]">
         <Text as="h1" variant="headingxl">
