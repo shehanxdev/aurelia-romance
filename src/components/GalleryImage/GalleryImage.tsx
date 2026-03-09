@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "../Button";
 
@@ -16,8 +16,38 @@ export function GalleryImage({
   const [showOverlay, setShowOverlay] = useState(false);
   const [showImageModal, setShowImageModal] = useState(false);
 
+  const modalId = `${albumId}-${albumType}-${url}`;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleOpenModalEvent = (event: Event) => {
+      const customEvent = event as CustomEvent<{ id: string }>;
+      const id = customEvent.detail?.id;
+
+      if (!id) return;
+      if (id !== modalId) {
+        setShowImageModal(false);
+      }
+    };
+
+    window.addEventListener("openGalleryImageModal", handleOpenModalEvent);
+
+    return () => {
+      window.removeEventListener("openGalleryImageModal", handleOpenModalEvent);
+    };
+  }, [modalId]);
+
   const handleViewImage = () => {
-    setShowImageModal(true);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("openGalleryImageModal", {
+          detail: { id: modalId },
+        }),
+      );
+    }
+
+    setShowImageModal((prev) => !prev);
   };
 
   const handleCloseModal = () => {
