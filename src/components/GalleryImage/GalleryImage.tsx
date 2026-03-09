@@ -36,7 +36,11 @@ export function GalleryImage({
             flex flex-col gap-4 lg:gap-8 justify-center items-center
           absolute top-0 left-0 w-full h-full bg-black/80 rounded-xl 
           transition-opacity duration-300 ease-in-out
-          ${showOverlay ? "opacity-100" : "opacity-0"} 
+          ${
+            showOverlay
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none lg:pointer-events-auto"
+          } 
           group-hover:opacity-100
         `}
         >
