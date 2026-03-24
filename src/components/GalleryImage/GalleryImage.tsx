@@ -57,14 +57,12 @@ export function GalleryImage({
   return (
     <>
       <div
-        className="relative group transition-transform duration-300 ease-in-out hover:scale-90"
+        className="group relative overflow-hidden rounded-[1.25rem] transition-transform duration-500 ease-in-out hover:scale-[0.98]"
         onClick={() => setShowOverlay((prev) => !prev)}
       >
-        {/* Overlay */}
         <div
           className={`
-            flex flex-col gap-4 lg:gap-8 justify-center items-center
-          absolute top-0 left-0 w-full h-full bg-black/80 rounded-xl 
+            absolute inset-0 flex flex-col items-center justify-center gap-4 bg-[linear-gradient(180deg,rgba(28,21,16,0.08),rgba(28,21,16,0.75))] px-4
           transition-opacity duration-300 ease-in-out
           ${
             showOverlay
@@ -74,9 +72,10 @@ export function GalleryImage({
           group-hover:opacity-100
         `}
         >
+          <div className="absolute inset-x-4 top-4 border-t border-white/40" />
           <Button
             textClassName="text-white"
-            className="outline-white px-4 h-[2.1em] sm:h-[3.3em] md:h-[4em]"
+            className="h-[2.4em] border border-white/60 bg-transparent px-4 text-white sm:h-[3.3em] md:h-[4em]"
             variant={"outlined"}
             onClick={(e) => {
               e.stopPropagation();
@@ -87,7 +86,7 @@ export function GalleryImage({
           </Button>
           <Button
             textClassName="text-white"
-            className="outline-white px-4 h-[2.1em] sm:h-[3.3em] md:h-[4em]"
+            className="h-[2.4em] border border-white/60 bg-transparent px-4 text-white sm:h-[3.3em] md:h-[4em]"
             variant={"outlined"}
             onClick={(e) => {
               e.stopPropagation();
@@ -96,12 +95,13 @@ export function GalleryImage({
           >
             View Album
           </Button>
+          <div className="absolute inset-x-4 bottom-4 border-t border-white/25" />
         </div>
 
         <img
           src={url}
           alt={alt}
-          className="w-full rounded-xl shadow-md object-cover"
+          className="luxury-image w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
         />
       </div>
 

@@ -46,7 +46,7 @@ export const imageData: ImageType[] = [
   },
   {
     type: "wedding",
-    albumId: "w124",
+    albumId: "w125",
     urlList: [IMG19, IMG20, IMG9, IMG10, IMG13, IMG12],
   },
 ];
@@ -57,7 +57,6 @@ type GalleryImageItem = {
   albumType: string;
 };
 
-// Helper to chunk array into N columns
 function chunkArray<T>(arr: T[], columns: number): T[][] {
   const chunked: T[][] = Array.from({ length: columns }, () => []);
   arr.forEach((item, index) => {
@@ -69,54 +68,96 @@ function chunkArray<T>(arr: T[], columns: number): T[][] {
 export function Gallery() {
   const [columnCount, setColumnCount] = useState(3);
 
-  // Update column count on resize
   useEffect(() => {
     const updateColumnCount = () => {
-      setColumnCount(window.innerWidth < 768 ? 2 : 3); // md = 768px
+      setColumnCount(window.innerWidth < 768 ? 2 : 3);
     };
+
     updateColumnCount();
     window.addEventListener("resize", updateColumnCount);
     return () => window.removeEventListener("resize", updateColumnCount);
   }, []);
 
-  // Get all images into a flat array
-  const allImages = useMemo<GalleryImageItem[]>(() => {
-    return imageData.flatMap((item) =>
-      item.urlList.map((url) => ({
-        url,
-        albumId: item.albumId,
-        albumType: item.type,
-      }))
-    );
-  }, []);
-  console.log(allImages);
+  const allImages = useMemo<GalleryImageItem[]>(
+    () =>
+      imageData.flatMap((item) =>
+        item.urlList.map((url) => ({
+          url,
+          albumId: item.albumId,
+          albumType: item.type,
+        }))
+      ),
+    []
+  );
 
-  // Distribute images across columns
   const columns = useMemo(
     () => chunkArray(allImages, columnCount),
     [allImages, columnCount]
   );
 
   return (
-    <div>
-      <Text
-        className="text-center leading-none w-[90%] m-auto py-12 md:py-20"
-        variant="headingxl"
-      >
-        <span className="text-primary ">Aurelia </span>Gallery
-      </Text>
-      <div className=" h-[100dvh] mt-[40px] lg:mt-[40px] grid grid-cols-2 md:grid-cols-3 ">
-        {columns.map((columnImages, colIndex) => (
-          <div
-            key={colIndex}
-            className="overflow-y-auto h-full px-1 space-y-2 "
-          >
-            {columnImages.map((galleryImageItem, imgIndex) => (
-              <GalleryImage url={galleryImageItem.url} alt={`${imgIndex}`}  albumId={galleryImageItem.albumId} albumType={galleryImageItem.albumType}/>
-            ))}
+    <div className="luxury-shell px-[5%] py-12 md:py-20">
+      <section className="luxury-panel rounded-[2rem] px-6 py-8 md:px-12 md:py-14">
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div>
+            <Text variant="label1" className="luxury-kicker mb-6">
+              Curated Gallery
+            </Text>
+            <Text variant="headingxl" className="leading-[0.85]">
+              An
+              <br />
+              <span className="text-primary">editorial</span> archive
+            </Text>
           </div>
-        ))}
-      </div>
+
+          <div className="space-y-6">
+            <Text variant="body" className="max-w-[19ch] font-light">
+              The home page already sells atmosphere. The gallery should do the
+              same by feeling framed, collected, and intentionally paced instead
+              of just dropping images into a plain grid.
+            </Text>
+            <div className="grid grid-cols-2 gap-4 border-t luxury-border pt-5">
+              <div>
+                <Text variant="label1" className="luxury-kicker mb-2">
+                  Focus
+                </Text>
+                <Text variant="body" className="font-light">
+                  Weddings & romance
+                </Text>
+              </div>
+              <div>
+                <Text variant="label1" className="luxury-kicker mb-2">
+                  Mood
+                </Text>
+                <Text variant="body" className="font-light">
+                  Soft, cinematic, heirloom
+                </Text>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="luxury-panel mt-10 rounded-[2rem] p-3 md:p-5">
+        <div className="grid h-[100dvh] grid-cols-2 gap-2 md:grid-cols-3 md:gap-3">
+          {columns.map((columnImages, colIndex) => (
+            <div
+              key={colIndex}
+              className="h-full space-y-2 overflow-y-auto rounded-[1.5rem] bg-white/35 p-2 md:space-y-3 md:p-3"
+            >
+              {columnImages.map((galleryImageItem, imgIndex) => (
+                <GalleryImage
+                  key={`${galleryImageItem.albumId}-${imgIndex}-${galleryImageItem.url}`}
+                  url={galleryImageItem.url}
+                  alt={`${galleryImageItem.albumType} ${imgIndex + 1}`}
+                  albumId={galleryImageItem.albumId}
+                  albumType={galleryImageItem.albumType}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
