@@ -25,44 +25,40 @@ export function Contact() {
 
   return (
     <div className="luxury-shell px-[5%] py-12 md:py-20">
-      <section className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
-        <div className="luxury-panel rounded-[2rem] px-6 py-8 md:px-10 md:py-12">
-          <Text variant="label1" className="luxury-kicker mb-6">
-            Enquiries
-          </Text>
-          <Text variant="headingxl" className="leading-[0.85]">
-            Contact
-            <br />
-            <span className="text-primary">Aurelia</span>
-          </Text>
-        </div>
+      <section className="luxury-panel rounded-[2rem] px-6 py-8 md:px-10 md:py-12">
+        <Text variant="label1" className="luxury-kicker mb-6">
+          Enquiries
+        </Text>
+        <Text variant="headingxl" className="leading-[0.85]">
+          Contact
+          <br />
+          <span className="text-primary">Aurelia</span>
+        </Text>
 
-        <div className="luxury-panel overflow-hidden rounded-[2rem] p-4 md:p-6">
-          <div className="grid gap-6 md:grid-cols-[1.05fr_0.95fr]">
-   
-            <div className="flex flex-col justify-between gap-8 rounded-[1.5rem] border luxury-border bg-[#f7f0e8] p-6 md:p-8">
-              <div>
-                <Text variant="label1" className="luxury-kicker mb-4">
-                  Response Window
+        <div className="mt-8 grid gap-8 border-t luxury-border pt-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+          <div>
+            <Text variant="label1" className="luxury-kicker mb-3">
+              Response Window
+            </Text>
+            <Text as="h2" variant="heading2" className="max-w-[13ch] leading-none">
+              Most enquiries are answered within 48 hours.
+            </Text>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-3 sm:gap-8">
+            {contactDetails.map((item) => (
+              <div key={item.label} className="border-t luxury-border pt-4">
+                <Text
+                  variant="label1"
+                  className="mb-2 font-semibold uppercase tracking-[0.18em]"
+                >
+                  {item.label}
                 </Text>
-                <Text as="h2" variant="heading2" className="leading-none">
-                  Most enquiries are answered within 48 hours.
+                <Text variant="body" className="font-light">
+                  {item.value}
                 </Text>
               </div>
-
-              <div className="space-y-5">
-                {contactDetails.map((item) => (
-                  <div key={item.label} className="border-t luxury-border pt-4">
-                    <Text variant="label1" className="mb-2 font-semibold uppercase tracking-[0.18em]">
-                      {item.label}
-                    </Text>
-                    <Text variant="body" className="font-light">
-                      {item.value}
-                    </Text>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -79,8 +75,8 @@ export function Contact() {
               setting, and season.
             </Text>
             <Text variant="body" className="mt-6 max-w-[18ch] font-light">
-              The form is framed more like a private consultation than a plain
-              contact block, which helps it feel aligned with the home page.
+              Tell me about the celebration, the location, and the feeling you
+              want your gallery to hold onto.
             </Text>
           </div>
 

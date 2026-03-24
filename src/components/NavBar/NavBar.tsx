@@ -1,8 +1,6 @@
-import gsap from "gsap";
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 
-import logoUrl from "../../assets/gold V2.png";
 import { Text } from "../Text";
 
 interface NavbarProps {
@@ -18,11 +16,10 @@ interface RouteItem {
 }
 
 export function NavBar({ layoutRef }: NavbarProps) {
-  const [isOpen, setIsOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const drawerRef = useRef<HTMLDivElement | null>(null);
-  const overlayRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const routes: RouteItem[] = [
     { title: "Gallery", path: "/gallery" },
@@ -30,35 +27,7 @@ export function NavBar({ layoutRef }: NavbarProps) {
     { title: "Contact", path: "/contact" },
   ];
 
-  useEffect(() => {
-    if (!drawerRef.current || !overlayRef.current) return;
-
-    const tl = gsap.timeline({
-      paused: true,
-      defaults: { duration: 0.5, ease: "power2.inOut" },
-    });
-
-    tl.to(overlayRef.current, {
-      opacity: 1,
-      visibility: "visible",
-    }).to(
-      drawerRef.current,
-      {
-        y: 0,
-      },
-      "<"
-    );
-
-    if (isOpen) {
-      tl.play();
-    } else {
-      tl.reverse();
-    }
-  }, [isOpen]);
-
   const handleNavigate = async (path: string) => {
-    setIsOpen(false);
-
     if (layoutRef?.current?.playExitAnimation) {
       await layoutRef.current.playExitAnimation();
     }
@@ -71,50 +40,75 @@ export function NavBar({ layoutRef }: NavbarProps) {
   };
 
   return (
-    <header className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 font-serif">
-      <div className="flex items-center justify-center gap-4 px-4 py-3 bg-white/80 backdrop-blur-md text-black rounded-full shadow-lg w-[90dvw] md:w-fit">
+    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-[5%] pt-5 md:pt-7">
+      <div
+        className={`flex w-full max-w-[760px] items-center justify-center gap-4 rounded-full border px-5 py-3 backdrop-blur-md md:gap-6 md:px-7 ${
+          isHomePage
+            ? "border-white/14 bg-[rgba(20,16,12,0.22)] text-white shadow-[0_18px_50px_rgba(0,0,0,0.14)]"
+            : "border-[rgba(122,101,50,0.16)] bg-[rgba(248,245,242,0.82)] text-[#403737] shadow-[0_18px_50px_rgba(64,55,55,0.08)]"
+        }`}
+      >
         <button
+          type="button"
           onClick={() => handleNavigate("/")}
-          className="p-0 border-none bg-transparent cursor-pointer"
+          className="shrink-0 border-none bg-transparent p-0"
           aria-label="Go to home"
         >
-          <img src={logoUrl} alt="Logo" className="h-5 md:h-8 w-auto" />
+          <Text
+            as="span"
+            variant="label1"
+            className={`font-serif uppercase tracking-[0.32em] ${
+              isHomePage ? "text-white" : "text-primary-dark"
+            }`}
+          >
+            Aurelia Romance
+          </Text>
         </button>
 
-        <div className="flex gap-4 px-4">
-          {routes.map((item, index) => (
-            <button
-              key={item.title}
-              onClick={() => handleNavigate(item.path)}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              className={`text-sm md:text-base transition-all duration-300 ${
-                hoveredIndex !== null && hoveredIndex !== index
-                  ? "blur-sm opacity-60"
-                  : ""
-              } hover:text-gold`}
-            >
-              <Text
-                className="font-family-inter cursor-pointer"
-                variant="label1"
-              >
-                {item.title}
-              </Text>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div
-        ref={overlayRef}
-        className="fixed inset-0 z-40 bg-black/40 backdrop-blur-3xl opacity-0 invisible"
-      >
         <div
-          ref={drawerRef}
-          className="absolute bottom-0 left-0 right-0 bg-white text-white rounded-t-2xl shadow-xl w-full h-[90vh] py-6 px-6 transform translate-y-full overflow-y-auto"
-        >
-          {/* Drawer content can go here if needed */}
-        </div>
+          className={`h-4 w-px shrink-0 md:h-5 ${
+            isHomePage ? "bg-white/20" : "bg-[rgba(122,101,50,0.2)]"
+          }`}
+        />
+
+        <nav className="flex items-center justify-center gap-4 md:gap-6">
+          {routes.map((item, index) => {
+            const isActive =
+              location.pathname === item.path ||
+              location.pathname.startsWith(`${item.path}/`);
+
+            return (
+              <button
+                key={item.title}
+                type="button"
+                onClick={() => handleNavigate(item.path)}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                className={`border-none bg-transparent p-0 transition-all duration-300 ${
+                  hoveredIndex !== null && hoveredIndex !== index
+                    ? "opacity-60"
+                    : "opacity-100"
+                }`}
+              >
+                <Text
+                  as="span"
+                  variant="label1"
+                  className={`uppercase tracking-[0.24em] ${
+                    isHomePage
+                      ? isActive
+                        ? "text-white"
+                        : "text-white/74 hover:text-white"
+                      : isActive
+                        ? "text-primary-dark"
+                        : "text-[#5f524d] hover:text-[#403737]"
+                  }`}
+                >
+                  {item.title}
+                </Text>
+              </button>
+            );
+          })}
+        </nav>
       </div>
     </header>
   );

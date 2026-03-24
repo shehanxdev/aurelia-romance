@@ -76,13 +76,8 @@ export function Home({ className }: HeroSection) {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,245,230,0.1),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(182,141,64,0.12),transparent_28%)]" />
         <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_140px_rgba(0,0,0,0.24)]" />
 
-        <div className="absolute left-[5%] top-8 md:top-10">
-          <Text variant="label1" className="luxury-kicker !text-white/78">
-            Aurelia Romance
-          </Text>
-        </div>
-
-        <div className="absolute inset-x-[5%] bottom-28 md:bottom-32">
+       
+        <div className="absolute inset-x-[5%] bottom-8 md:bottom-8">
           <div className="max-w-[700px] text-white">
             <div className="mb-5 w-20 border-t border-white/35 md:mb-7 md:w-28" />
             <Text

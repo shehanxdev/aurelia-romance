@@ -14,7 +14,10 @@ function App() {
 
   return (
     <div className="h-screen overflow-auto">
-      <NavBar layoutRef={layoutRef} />
+      <div className="mb-5">
+        <NavBar layoutRef={layoutRef} />
+      </div>
+      
       <Layout ref={layoutRef}>
         <Routes>
           <Route path="/" element={<Home />} />
