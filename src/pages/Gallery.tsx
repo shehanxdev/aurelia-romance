@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { GalleryImage, Text } from "@components";
 
@@ -57,6 +58,10 @@ type GalleryImageItem = {
   albumType: string;
 };
 
+type ActiveImage = GalleryImageItem & {
+  alt: string;
+};
+
 function chunkArray<T>(arr: T[], columns: number): T[][] {
   const chunked: T[][] = Array.from({ length: columns }, () => []);
   arr.forEach((item, index) => {
@@ -67,6 +72,7 @@ function chunkArray<T>(arr: T[], columns: number): T[][] {
 
 export function Gallery() {
   const [columnCount, setColumnCount] = useState(3);
+  const [activeImage, setActiveImage] = useState<ActiveImage | null>(null);
 
   useEffect(() => {
     const updateColumnCount = () => {
@@ -95,10 +101,30 @@ export function Gallery() {
     [allImages, columnCount]
   );
 
+  useEffect(() => {
+    if (!activeImage) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveImage(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [activeImage]);
+
   return (
     <div className="luxury-shell px-[5%] py-12 md:py-20">
       <section className="luxury-panel rounded-[2rem] px-6 py-8 md:px-12 md:py-14">
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+        <div className="grid gap-8">
           <div>
             <Text variant="label1" className="luxury-kicker mb-6">
               Curated Gallery
@@ -111,18 +137,14 @@ export function Gallery() {
           </div>
 
           <div className="space-y-6">
-            <Text variant="body" className="max-w-[19ch] font-light">
-              The home page already sells atmosphere. The gallery should do the
-              same by feeling framed, collected, and intentionally paced instead
-              of just dropping images into a plain grid.
-            </Text>
+       
             <div className="grid grid-cols-2 gap-4 border-t luxury-border pt-5">
               <div>
                 <Text variant="label1" className="luxury-kicker mb-2">
                   Focus
                 </Text>
                 <Text variant="body" className="font-light">
-                  Weddings & romance
+                  Weddings, romance
                 </Text>
               </div>
               <div>
@@ -130,7 +152,7 @@ export function Gallery() {
                   Mood
                 </Text>
                 <Text variant="body" className="font-light">
-                  Soft, cinematic, heirloom
+                  Soft, cinematic
                 </Text>
               </div>
             </div>
@@ -152,12 +174,58 @@ export function Gallery() {
                   alt={`${galleryImageItem.albumType} ${imgIndex + 1}`}
                   albumId={galleryImageItem.albumId}
                   albumType={galleryImageItem.albumType}
+                  onOpen={(payload) => setActiveImage(payload)}
                 />
               ))}
             </div>
           ))}
         </div>
       </section>
+
+      {activeImage &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[120] bg-[rgba(18,15,13,0.9)] backdrop-blur-md"
+            onClick={() => setActiveImage(null)}
+          >
+            <div className="relative flex h-full w-full items-center justify-center p-4 sm:p-6 lg:p-10">
+              <button
+                type="button"
+                className="absolute right-4 top-4 z-[121] flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/25 text-2xl text-white backdrop-blur-sm transition-colors duration-300 hover:bg-black/45 sm:right-6 sm:top-6"
+                aria-label="Close image"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveImage(null);
+                }}
+              >
+                ×
+              </button>
+
+              <div
+                className="relative flex h-full w-full items-center justify-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="relative flex h-full w-full items-center justify-center">
+                  <img
+                    src={activeImage.url}
+                    alt={activeImage.alt}
+                    className="max-h-full max-w-full object-contain"
+                  />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[rgba(18,15,13,0.96)] to-transparent sm:h-40" />
+                  <div className="absolute inset-x-0 bottom-6 flex justify-center px-5 sm:bottom-8">
+                    <button
+                      type="button"
+                      className="rounded-full border border-white/30 bg-white/10 px-6 py-3 text-base text-white backdrop-blur-sm transition-colors duration-300 hover:bg-white/16"
+                    >
+                      View Album
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>,
+          document.body
+        )}
     </div>
   );
 }
