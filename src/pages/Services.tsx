@@ -69,11 +69,7 @@ export function Services() {
               for <span className="text-primary">romance</span>
             </Text>
           </div>
-          <Text variant="body" className="max-w-[18ch] font-light">
-            The inner pages need the same sense of occasion as the home page,
-            so this layout gives each service more framing, more atmosphere,
-            and more breathing room.
-          </Text>
+          
         </div>
       </section>
 

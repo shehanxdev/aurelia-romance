@@ -2,8 +2,6 @@ import { useState } from "react";
 
 import { Button, Text } from "@components";
 
-import STUDIO_IMAGE from "../assets/images/studio.avif";
-
 const contactDetails = [
   { label: "Email", value: "hello@aureliaromance.com" },
   { label: "Phone", value: "+94 77 123 4567" },
@@ -37,21 +35,11 @@ export function Contact() {
             <br />
             <span className="text-primary">Aurelia</span>
           </Text>
-          <Text variant="body" className="mt-8 max-w-[18ch] font-light">
-            Luxury on the inside pages comes from restraint: fewer generic
-            blocks, more framing, more texture, and copy that feels calm and
-            considered.
-          </Text>
         </div>
 
         <div className="luxury-panel overflow-hidden rounded-[2rem] p-4 md:p-6">
           <div className="grid gap-6 md:grid-cols-[1.05fr_0.95fr]">
-            <img
-              src={STUDIO_IMAGE}
-              alt="Aurelia Romance studio portrait"
-              className="luxury-image h-[320px] w-full rounded-[1.5rem] object-cover md:h-full"
-            />
-
+   
             <div className="flex flex-col justify-between gap-8 rounded-[1.5rem] border luxury-border bg-[#f7f0e8] p-6 md:p-8">
               <div>
                 <Text variant="label1" className="luxury-kicker mb-4">

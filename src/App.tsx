@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { Route, Routes } from "react-router";
 
 import { NavBar } from "@components";
-import { Contact, Gallery, Home, Services } from "@pages";
+import { Album, Contact, Gallery, Home, Services } from "@pages";
 
 // Add your navbar
 import { Layout } from "./Layout";
@@ -20,6 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/gallery/:albumId" element={<Album />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </Layout>
