@@ -31,7 +31,7 @@
 
 html {
   font-family: var(--font-family-inter);
-  overflow: hidden;
+  overflow-x: hidden;
   background-color: #f3eee7;
 }
 

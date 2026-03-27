@@ -58,14 +58,12 @@ export function Text({
   ...props
 }: TextProps) {
   return (
-    <div className="text-[16px]">
-      <Comp
-        className={cn(textVariants({ variant, textColor }), className)}
-        data-testid={testId}
-        {...props}
-      >
-        {children}
-      </Comp>
-    </div>
+    <Comp
+      className={cn("text-[16px]", textVariants({ variant, textColor }), className)}
+      data-testid={testId}
+      {...props}
+    >
+      {children}
+    </Comp>
   );
 }

@@ -41,28 +41,23 @@ export function Button({
   ...props
 }: ButtonProps) {
   return (
-    <div className="text-[16px]">
-      <button
-        data-testid={testId}
-        className={cn(buttonVariants({ variant, className }))}
-        {...props}
-      >
-        {variant === "iconButton" ? (
-          <div>{children}</div>
-        ) : (
-          <>
-            {/* Note: leading-none and contents were used to correct centering
-        most probably caused by line-height */}
-            <Text
-              className={`leading-none contents ${textClassName}`}
-              variant="button"
-              textColor={variant === "filled" ? "white" : "black"}
-            >
-              {children}
-            </Text>
-          </>
-        )}
-      </button>
-    </div>
+    <button
+      data-testid={testId}
+      className={cn("text-[16px]", buttonVariants({ variant, className }))}
+      {...props}
+    >
+      {variant === "iconButton" ? (
+        <span>{children}</span>
+      ) : (
+        <Text
+          as="span"
+          className={`leading-none ${textClassName ?? ""}`}
+          variant="button"
+          textColor={variant === "filled" ? "white" : "black"}
+        >
+          {children}
+        </Text>
+      )}
+    </button>
   );
 }

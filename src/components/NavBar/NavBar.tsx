@@ -42,7 +42,7 @@ export function NavBar({ layoutRef }: NavbarProps) {
   return (
     <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-[5%] pt-5 md:pt-7">
       <div
-        className={`flex w-full max-w-[760px] items-center justify-center gap-4 rounded-full border px-5 py-3 backdrop-blur-md md:gap-6 md:px-7 ${
+        className={`flex w-full max-w-[760px] items-center gap-2 rounded-full border px-3 py-3 backdrop-blur-md sm:gap-4 sm:px-5 md:gap-6 md:px-7 ${
           isHomePage
             ? "border-white/14 bg-[rgba(20,16,12,0.22)] text-white shadow-[0_18px_50px_rgba(0,0,0,0.14)]"
             : "border-[rgba(122,101,50,0.16)] bg-[rgba(248,245,242,0.82)] text-[#403737] shadow-[0_18px_50px_rgba(64,55,55,0.08)]"
@@ -57,21 +57,22 @@ export function NavBar({ layoutRef }: NavbarProps) {
           <Text
             as="span"
             variant="label1"
-            className={`font-serif uppercase tracking-[0.32em] ${
+            className={`font-serif text-[0.8em] uppercase tracking-[0.16em] sm:text-[1em] sm:tracking-[0.32em] ${
               isHomePage ? "text-white" : "text-primary-dark"
             }`}
           >
-            Aurelia Romance
+            <span className="sm:hidden">AR</span>
+            <span className="hidden sm:inline">Aurelia Romance</span>
           </Text>
         </button>
 
         <div
-          className={`h-4 w-px shrink-0 md:h-5 ${
+          className={`hidden h-4 w-px shrink-0 sm:block md:h-5 ${
             isHomePage ? "bg-white/20" : "bg-[rgba(122,101,50,0.2)]"
           }`}
         />
 
-        <nav className="flex items-center justify-center gap-4 md:gap-6">
+        <nav className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-4 md:justify-center md:gap-6">
           {routes.map((item, index) => {
             const isActive =
               location.pathname === item.path ||
@@ -93,7 +94,7 @@ export function NavBar({ layoutRef }: NavbarProps) {
                 <Text
                   as="span"
                   variant="label1"
-                  className={`uppercase tracking-[0.24em] ${
+                  className={`text-[0.78em] uppercase tracking-[0.08em] sm:text-[1em] sm:tracking-[0.24em] ${
                     isHomePage
                       ? isActive
                         ? "text-white"
